@@ -15,7 +15,7 @@ export default {
     n5Departement (state) {
       if (state.n5.filter !== '' && Object.keys(state.n5.departement).length) {
         const filter = Object.keys(state.n5.departement)
-          .filter((key) => key.toLowerCase().indexOf(state.n5.filter) !== -1)
+          .filter((key) => key.toLowerCase().indexOf(state.n5.filter.toLowerCase()) !== -1)
           .reduce((obj, key) => {
             obj[key] = state.n5.departement[key]
             return obj
@@ -29,7 +29,7 @@ export default {
     n4Region (state) {
       if (state.n4.filter !== '' && Object.keys(state.n4.region).length) {
         const filter = Object.keys(state.n4.region)
-          .filter((key) => key.toLowerCase().indexOf(state.n4.filter) !== -1)
+          .filter((key) => key.toLowerCase().indexOf(state.n4.filter.toLowerCase()) !== -1)
           .reduce((obj, key) => {
             obj[key] = state.n4.region[key]
             return obj
