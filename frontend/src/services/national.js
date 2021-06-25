@@ -1,28 +1,29 @@
+// Service plus utilisé, on passe directement par le helper http.js
 import http from '@/helpers/http.js'
 
-async function n1 () {
-  const response = await http.get('national/n1/')
+async function n10 () {
+  const response = await http.get('national/n10/')
   return response.data
 }
 
-async function n2 () {
-  const response = await http.get('national/n2/')
+async function n11 () {
+  const response = await http.get('national/n11/')
   return response.data
 }
 
-async function n3 () {
-  const response = await http.get('national/n3/')
+async function n12 () {
+  const response = await http.get('national/n12/')
   return response.data
 }
 
-async function n4 () {
-  const response = await http.get('national/n4/')
+async function n13 () {
+  const response = await http.get('national/n13/')
   return response.data
 }
 
 export default {
-  n1,
-  n2,
-  n3,
-  n4
+  n10,
+  n11,
+  n12,
+  n13
 }

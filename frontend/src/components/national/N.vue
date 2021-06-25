@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import BarChart from '@/components/BarChart'
+import BarChart from '@/components/chart/BarChart'
 
 export default {
   components: {
@@ -17,7 +17,6 @@ export default {
   },
   data () {
     return {
-      /* eslint-disable */
       data: {
         labels: [2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020],
         datasets: [
@@ -59,7 +58,6 @@ export default {
           },
         ],
       },
-      /* eslint-enable */
       options: {
         scales: {
           yAxes: [

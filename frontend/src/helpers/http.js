@@ -72,7 +72,6 @@ async function xhr (method = 'get', url, data = {}) {
 async function jsonHttpRequest(uri, requestOptions) {
   const apiUrl = process.env.VUE_APP_API_URL || '';
   try {
-    // eslint-disable-next-line
     requestOptions.headers = {
       'Content-Type': 'application/json',
     };

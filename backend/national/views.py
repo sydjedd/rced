@@ -12,7 +12,7 @@ from django.db.models.functions import Lag, Cast, Round
 @login_required
 #@group_required('national')
 #@permission_required('national.view_t1')
-def National1View(request):
+def National10View(request):
     return JsonResponse({
         'electronique' :
             list(
@@ -31,7 +31,7 @@ def National1View(request):
     }, safe = False)
 
 @login_required
-def National2View(request):
+def National11View(request):
     return JsonResponse({
         'horsEtablissement' :
             list(
@@ -54,20 +54,7 @@ def National2View(request):
     }, safe = False)
 
 @login_required
-def National3View(request):
-    return JsonResponse({
-        'enEtablissement' :
-            list(CertificatElectronique.objects
-                .values('annee_deces', 'trimestre_deces')
-                .annotate(nombre = Count('id'))
-                .filter(hors_etablissement = 0)
-                .order_by('annee_deces', 'trimestre_deces')
-            )
-        ,
-    }, safe = False)
-
-@login_required
-def National4View(request):
+def National12View(request):
     return JsonResponse({
         'enEtablissement' :
             list(CertificatElectronique.objects
@@ -84,7 +71,20 @@ def National4View(request):
     }, safe = False)
 
 @login_required
-def National5View(request):
+def National13View(request):
+    return JsonResponse({
+        'enEtablissement' :
+            list(CertificatElectronique.objects
+                .values('annee_deces', 'trimestre_deces')
+                .annotate(nombre = Count('id'))
+                .filter(hors_etablissement = 0)
+                .order_by('annee_deces', 'trimestre_deces')
+            )
+        ,
+    }, safe = False)
+
+@login_required
+def National30View(request):
     return JsonResponse({
         'electronique' :
             list(CertificatElectronique.objects

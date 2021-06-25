@@ -4,41 +4,41 @@ import http from '@/helpers/http.js'
 export default {
   namespaced: true,
   state: {
-    n1: { alert: !localStorage.getItem('n1.alert') === 'false', loading: true, filter: '', annee: [], electronique: {}, papier: {} },
-    n2: { alert: !localStorage.getItem('n2.alert') === 'false', loading: true, filter: '', annee: [], enEtablissement: {}, horsEtablissement: {} },
-    n3: { alert: !localStorage.getItem('n3.alert') === 'false', loading: true, filter: '', annee: [], enEtablissement: {} },
-    n4: { alert: !localStorage.getItem('n4.alert') === 'false', loading: true, filter: '', annee: [], region: {} },
-    n5: { alert: !localStorage.getItem('n5.alert') === 'false', loading: true, filter: '', annee: [], departement: {} }
+    n10: { filter: '', annee: [], electronique: {}, papier: {} },
+    n11: { filter: '', annee: [], enEtablissement: {}, horsEtablissement: {} },
+    n13: { filter: '', annee: [], enEtablissement: {} },
+    n12: { filter: '', annee: [], region: {} },
+    n30: { filter: '', annee: [], departement: {} }
   },
 
   getters: {
-    n5Departement (state) {
-      if (state.n5.filter !== '' && Object.keys(state.n5.departement).length) {
-        const filter = Object.keys(state.n5.departement)
-          .filter((key) => key.toLowerCase().indexOf(state.n5.filter.toLowerCase()) !== -1)
+    n30Departement (state) {
+      if (state.n30.filter && state.n30.filter !== '' && Object.keys(state.n30.departement).length) {
+        const filter = Object.keys(state.n30.departement)
+          .filter((key) => key.toLowerCase().indexOf(state.n30.filter.toLowerCase()) !== -1)
           .reduce((obj, key) => {
-            obj[key] = state.n5.departement[key]
+            obj[key] = state.n30.departement[key]
             return obj
           }, {})
         if (filter && Object.keys(filter).length) {
           return filter
         }
       }
-      return state.n5.departement
+      return state.n30.departement
     },
-    n4Region (state) {
-      if (state.n4.filter !== '' && Object.keys(state.n4.region).length) {
-        const filter = Object.keys(state.n4.region)
-          .filter((key) => key.toLowerCase().indexOf(state.n4.filter.toLowerCase()) !== -1)
+    n12Region (state) {
+      if (state.n12.filter && state.n12.filter !== '' && Object.keys(state.n12.region).length) {
+        const filter = Object.keys(state.n12.region)
+          .filter((key) => key.toLowerCase().indexOf(state.n12.filter.toLowerCase()) !== -1)
           .reduce((obj, key) => {
-            obj[key] = state.n4.region[key]
+            obj[key] = state.n12.region[key]
             return obj
           }, {})
         if (filter && Object.keys(filter).length) {
           return filter
         }
       }
-      return state.n4.region
+      return state.n12.region
     }
   },
   mutations: {
@@ -46,153 +46,145 @@ export default {
       state[data.n][data.property] = data.value
       localStorage.setItem(data.n + '.' + data.property, data.value)
     },
-    UPDATE_N1 (state, newValue) {
+    UPDATE_N10 (state, newValue) {
       newValue.electronique.forEach((element) => {
-        state.n1.electronique[element.annee_deces] = element.nombre
-        state.n1.annee.push(element.annee_deces)
+        state.n10.electronique[element.annee_deces] = element.nombre
+        state.n10.annee.push(element.annee_deces)
       })
       newValue.papier.forEach((element) => {
-        state.n1.papier[element.annee_deces] = element.nombre
-        if (state.n1.annee.indexOf(element.annee_deces) === -1) {
-          state.n1.annee.push(element.annee_deces)
+        state.n10.papier[element.annee_deces] = element.nombre
+        if (state.n10.annee.indexOf(element.annee_deces) === -1) {
+          state.n10.annee.push(element.annee_deces)
         }
       })
-      state.n1.annee.sort()
-      state.n1.loading = false
+      state.n10.annee.sort()
     },
-    UPDATE_N2 (state, newValue) {
+    UPDATE_N11 (state, newValue) {
       newValue.enEtablissement.forEach((element) => {
-        // On utilise Vue.set(object, key, value); sinon impossible d utiliser Object.keys
-        // state.n2.enEtablissement[element['annee_deces']] = element['nombre'];
+        // On utilise Vue.set(object, key, value) sinon impossible d utiliser Object.keys
+        // state.n11.enEtablissement[element['annee_deces']] = element['nombre']
         Vue.set(
-          state.n2.enEtablissement,
+          state.n11.enEtablissement,
           element.annee_deces,
           element.nombre
         )
-        state.n2.annee.push(element.annee_deces)
+        state.n11.annee.push(element.annee_deces)
       })
       newValue.horsEtablissement.forEach((element) => {
-        // On utilise Vue.set(object, key, value); sinon impossible d utiliser Object.keys
-        // state.n2.horsEtablissement[element['annee_deces']] = element['nombre'];
+        // On utilise Vue.set(object, key, value) sinon impossible d utiliser Object.keys
+        // state.n11.horsEtablissement[element['annee_deces']] = element['nombre']
         Vue.set(
-          state.n2.horsEtablissement,
+          state.n11.horsEtablissement,
           element.annee_deces,
           element.nombre
         )
-        if (state.n2.annee.indexOf(element.annee_deces) === -1) {
-          state.n2.annee.push(element.annee_deces)
+        if (state.n11.annee.indexOf(element.annee_deces) === -1) {
+          state.n11.annee.push(element.annee_deces)
         }
       })
-      state.n2.annee.sort()
-      state.n2.loading = false
+      state.n11.annee.sort()
     },
-    UPDATE_N3 (state, newValue) {
+    UPDATE_N13 (state, newValue) {
       newValue.enEtablissement.forEach((element) => {
-        if (state.n3.annee.indexOf(element.annee_deces) === -1) {
-          state.n3.annee.push(element.annee_deces)
+        if (state.n13.annee.indexOf(element.annee_deces) === -1) {
+          state.n13.annee.push(element.annee_deces)
         }
-        if (!state.n3.enEtablissement[element.annee_deces]) {
-          state.n3.enEtablissement[element.annee_deces] = {}
+        if (!state.n13.enEtablissement[element.annee_deces]) {
+          state.n13.enEtablissement[element.annee_deces] = {}
         }
-        // eslint-disable-next-line
-        state.n3.enEtablissement[element['annee_deces']][element['trimestre_deces']] = element['nombre'];
+        state.n13.enEtablissement[element.annee_deces][element.trimestre_deces] = element.nombre
       })
-      state.n3.annee.sort()
-      state.n3.loading = false
+      state.n13.annee.sort()
     },
-    UPDATE_N4 (state, newValue) {
-      /* eslint-disable */
-      let region = '';
+    UPDATE_N12 (state, newValue) {
+      let region = ''
       newValue.enEtablissement.forEach((element) => {
-        region = (element['region_libelle'] || '')
-        if (state.n4.annee.indexOf(element['annee_deces']) == -1) {
-          state.n4.annee.push(element['annee_deces']);
+        region = (element.region_libelle || '')
+        if (state.n12.annee.indexOf(element.annee_deces) === -1) {
+          state.n12.annee.push(element.annee_deces)
         }
-        if (!state.n4.region[region]) {
-          // On utilise Vue.set(object, key, value); sinon impossible d utiliser Object.keys
-          //state.n4.region[region] = {};
-          Vue.set(state.n4.region, region, {});
+        if (!state.n12.region[region]) {
+          // On utilise Vue.set(object, key, value) sinon impossible d utiliser Object.keys
+          // state.n12.region[region] = {}
+          Vue.set(state.n12.region, region, {})
         }
-        if (!state.n4.region[region][element['annee_deces']]) {
-          state.n4.region[region][element['annee_deces']] = {};
+        if (!state.n12.region[region][element.annee_deces]) {
+          state.n12.region[region][element.annee_deces] = {}
         }
-        state.n4.region[region][element['annee_deces']][element['trimestre_deces']] = element['nombre'];
-      });
-      state.n4.annee.sort();
-      state.n4.loading = false;
-      /* eslint-enable */
+        state.n12.region[region][element.annee_deces][element.trimestre_deces] = element.nombre
+      })
+      state.n12.annee.sort()
     },
-    UPDATE_N5 (state, newValue) {
+    UPDATE_N30 (state, newValue) {
       let departement = ''
       newValue.electronique.forEach((element) => {
         departement =
           (element.departement_id || '') +
           ' - ' +
           (element.departement_libelle || '')
-        if (state.n5.annee.indexOf(element.annee_deces) === -1) {
-          state.n5.annee.push(element.annee_deces)
+        if (state.n30.annee.indexOf(element.annee_deces) === -1) {
+          state.n30.annee.push(element.annee_deces)
         }
-        if (!state.n5.departement[departement]) {
-          // On utilise Vue.set(object, key, value); sinon impossible d utiliser Object.keys
-          // state.n5.departement[departement] = {};
-          Vue.set(state.n5.departement, departement, {})
+        if (!state.n30.departement[departement]) {
+          // On utilise Vue.set(object, key, value) sinon impossible d utiliser Object.keys
+          // state.n30.departement[departement] = {}
+          Vue.set(state.n30.departement, departement, {})
         }
-        state.n5.departement[departement][element.annee_deces] = {
+        state.n30.departement[departement][element.annee_deces] = {
           nombre: element.nombre,
           evolution: element.evolution || null
         }
       })
-      state.n5.annee.sort()
-      state.n5.loading = false
+      state.n30.annee.sort()
     }
   },
   actions: {
     async property ({ commit }, data) {
       commit('UPDATE_PROPERTY', data)
     },
-    async n1 ({ commit, state }) {
-      if (!state.n1.annee.length) {
-        const data = await http.get('national/n1/')
+    async n10 ({ commit, state }) {
+      if (!state.n10.annee.length) {
+        const data = await http.get('national/n10/')
         if (!data) {
           return false
         }
-        commit('UPDATE_N1', data)
+        commit('UPDATE_N10', data)
       }
     },
-    async n2 ({ commit, state }) {
-      if (!state.n2.annee.length) {
-        const data = await http.get('national/n2/')
+    async n11 ({ commit, state }) {
+      if (!state.n11.annee.length) {
+        const data = await http.get('national/n11/')
         if (!data) {
           return false
         }
-        commit('UPDATE_N2', data)
+        commit('UPDATE_N11', data)
       }
     },
-    async n3 ({ commit, state }) {
-      if (!state.n3.annee.length) {
-        const data = await http.get('national/n3/')
+    async n13 ({ commit, state }) {
+      if (!state.n13.annee.length) {
+        const data = await http.get('national/n13/')
         if (!data) {
           return false
         }
-        commit('UPDATE_N3', data)
+        commit('UPDATE_N13', data)
       }
     },
-    async n4 ({ commit, state }) {
-      if (!state.n4.region.length) {
-        const data = await http.get('national/n4/')
+    async n12 ({ commit, state }) {
+      if (!state.n12.region.length) {
+        const data = await http.get('national/n12/')
         if (!data) {
           return false
         }
-        commit('UPDATE_N4', data)
+        commit('UPDATE_N12', data)
       }
     },
-    async n5 ({ commit, state }) {
-      if (!state.n5.annee.length) {
-        const data = await http.get('national/n5/')
+    async n30 ({ commit, state }) {
+      if (!state.n30.annee.length) {
+        const data = await http.get('national/n30/')
         if (!data) {
           return false
         }
-        commit('UPDATE_N5', data)
+        commit('UPDATE_N30', data)
       }
     }
   }

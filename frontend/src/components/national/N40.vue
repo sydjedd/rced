@@ -1,25 +1,23 @@
 <template>
   <div>
     <!-- v-alert dense dismissible border="left" type="warning" outlined prominent text -->
-    <v-alert v-model="alert" dense dismissible border="left" type="warning">
-      Attention, le nombre de e-certificats est partiel pour l'année en cours
-      (septembre à la date de production de ce rapport) et considère les e-dc
-      déclarés en établissement et hors établissement. L'année considérée est
-      celle de la date de validation du certificat électronique (et non la date
-      du décès). Pour les 2 années antérieures, il peut y avoir à la marge
-      quelques certificats "doublons" qui sont traités au moment de la
-      finalisation de l'année. L'évolution est celle du nombre de e-dc par
-      rapport à l'année antérieure.
+    <v-alert dense dismissible border="left" type="warning">
+      Attention, les e-certificats dénombrés ici concernent seulement ceux
+      déclarés en établissement. L'année considérée est celle de la date de
+      validation du certificat électronique (et non la date du décès). Pour les
+      2 années antérieures, il peut y avoir à la marge quelques certificats
+      "doublons" qui sont traités au moment de la finalisation de l'année.
+      L'évolution est celle du nombre de e-dc par rapport à l'année antérieure.
     </v-alert>
 
-    <v-card :loading="n5.loading">
+    <v-card :loading="loading">
       <v-card-text>
         <v-skeleton-loader
-          v-if="n5.loading"
-          :loading="n5.loading"
+          v-if="loading"
+          :loading="loading"
           :type="'table-row-divider@' + skeletonLoader"
         ></v-skeleton-loader>
-        <v-simple-table v-if="!n5.loading" class="sticky" dense fixed-header>
+        <v-simple-table v-if="!loading" class="sticky" dense fixed-header>
           <template v-slot:default>
             <thead>
               <tr class="text-uppercase">
@@ -39,14 +37,14 @@
                 <th
                   class="white--text text-center primary border-left"
                   colspan="2"
-                  v-for="(annee, indexAnnee) in n5.annee"
+                  v-for="(annee, indexAnnee) in n40.annee"
                   :key="indexAnnee"
                 >
                   {{ annee }}
                 </th>
               </tr>
               <tr class="text-uppercase">
-                <template v-for="(annee, indexAnnee) in n5.annee">
+                <template v-for="(annee, indexAnnee) in n40.annee">
                   <th
                     class="white--text text-center primary border-left"
                     :key="indexAnnee + '1'"
@@ -64,11 +62,11 @@
             </thead>
             <tbody>
               <tr
-                v-for="(departement, indexDepartement) in n5.departement"
+                v-for="(departement, indexDepartement) in n40.departement"
                 :key="indexDepartement"
               >
                 <th class="text-no-wrap">{{ indexDepartement }}</th>
-                <template v-for="(annee, indexAnnee) in n5.annee">
+                <template v-for="(annee, indexAnnee) in n40.annee">
                   <td
                     class="text-right border-left"
                     :key="indexDepartement + indexAnnee + '1'"
@@ -170,46 +168,37 @@ td.border-left {
 export default {
   data () {
     return {
+      loading: true,
       skeletonLoader: 0
     }
   },
   computed: {
-    alert: {
-      get () {
-        return this.$store.state.national.n5.alert
-      },
-      set (newValue) {
-        return this.$store.dispatch('national/property', {
-          n: 'n5',
-          property: 'alert',
-          value: newValue
-        })
-      }
-    },
     filter: {
       get () {
-        return this.$store.state.national.n5.filter
+        return this.$store.state.national.n40.filter
       },
       set (newValue) {
         return this.$store.dispatch('national/property', {
-          n: 'n5',
+          n: 'n40',
           property: 'filter',
           value: newValue
         })
       }
     },
-    n5: {
+    n40: {
       get () {
         return {
-          loading: this.$store.state.national.n5.loading,
-          departement: this.$store.getters['national/n5Departement'],
-          annee: this.$store.state.national.n5.annee
+          loading: this.$store.state.national.loading,
+          departement: this.$store.getters['national/n40Departement'],
+          annee: this.$store.state.national.n40.annee
         }
       }
     }
   },
-  created () {
-    this.$store.dispatch('national/n5')
+  async created () {
+    this.loading = true
+    await this.$store.dispatch('national/n40')
+    this.loading = false
   },
   mounted () {
     this.skeletonLoader = Math.floor(

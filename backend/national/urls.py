@@ -3,9 +3,9 @@ from . import views
 
 
 urlpatterns = [
-    path('n1/', views.National1View, name = 'n1'),
-    path('n2/', views.National2View, name = 'n2'),
-    path('n3/', views.National3View, name = 'n3'),
-    path('n4/', views.National4View, name = 'n4'),
-    path('n5/', views.National5View, name = 'n5'),
+    path('n10/', views.National10View, name = 'n10'),
+    path('n11/', views.National11View, name = 'n11'),
+    path('n12/', views.National12View, name = 'n12'),
+    path('n13/', views.National13View, name = 'n13'),
+    path('n30/', views.National30View, name = 'n30'),
 ]

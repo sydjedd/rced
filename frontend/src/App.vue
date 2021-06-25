@@ -1,6 +1,5 @@
 <template>
   <v-app>
-    <!-- eslint-disable-next-line -->
     <v-navigation-drawer v-if="this.$route.meta.loggedOnly" v-model="drawer" app>
       <v-list dense nav>
         <v-list-item>
@@ -18,7 +17,6 @@
 
           <v-list-item-content>
             <v-list-item-title>
-              <!-- eslint-disable-next-line -->
               {{ this.$store.state.user.first_name + ' ' + this.$store.state.user.last_name }}
             </v-list-item-title>
 
@@ -70,7 +68,6 @@
       <v-divider></v-divider>
 
       <v-list dense nav>
-        <!-- eslint-disable-next-line -->
         <v-list-item v-for="(item, index) in items" :key="index" :to="item.link" link router>
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
@@ -83,7 +80,6 @@
       </v-list>
     </v-navigation-drawer>
 
-    <!-- eslint-disable-next-line -->
     <v-app-bar v-if="this.$route.meta.loggedOnly" color="primary" dense dark app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>{{ this.$route.name }}</v-toolbar-title>
@@ -116,10 +112,8 @@ export default {
 
   computed: {
     initial () {
-      /* eslint-disable */
-      const nom = this.$store.state.user.first_name ? this.$store.state.user.first_name.charAt(0).toLocaleUpperCase() : '';
-      const prenom = this.$store.state.user.last_name ? this.$store.state.user.last_name.charAt(0).toLocaleUpperCase() : '';
-      /* eslint-enable */
+      const nom = this.$store.state.user.first_name ? this.$store.state.user.first_name.charAt(0).toLocaleUpperCase() : ''
+      const prenom = this.$store.state.user.last_name ? this.$store.state.user.last_name.charAt(0).toLocaleUpperCase() : ''
       return nom + prenom
     }
   },
