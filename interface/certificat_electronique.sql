@@ -25,7 +25,7 @@ SELECT
     DATE_PART('quarter', datedecesretenu), -- trimestre_deces
     sourcedatas -- source
 FROM
-    certificat_sref
+    referentiel_sref
 WHERE
     DATE_PART('year', datedecesretenu) > 2006
     AND certstatuttest = 1
