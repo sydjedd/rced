@@ -13,7 +13,7 @@ SELECT
     DATE_PART('year', datedecesretenu), -- annee_deces
     COUNT(numcertificat) -- nombre
 FROM
-    sref_certificat
+    certificat_sref
 WHERE
     DATE_PART('year', datedecesretenu) > 2006
     AND certorigine = '2'

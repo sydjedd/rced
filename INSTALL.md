@@ -139,7 +139,7 @@ CREATE SERVER sref FOREIGN DATA WRAPPER tds_fdw OPTIONS (
 	tds_version '7.1'
 );
 
-CREATE FOREIGN TABLE sref_certificat (
+CREATE FOREIGN TABLE certificat_sref (
     numcertificat varchar(13) NOT NULL,
     certorigine int2 NULL,
     certcletemporaire varchar(20) NULL,
@@ -310,7 +310,7 @@ CREATE FOREIGN TABLE sref_certificat (
     schema_name 'dbo',
     table_name 'CertificatsSRef'
 );
-GRANT ALL PRIVILEGES ON sref_certificat TO rced;
+GRANT ALL PRIVILEGES ON certificat_sref TO rced;
 
 CREATE USER MAPPING FOR rced SERVER sref OPTIONS (
     username 'utilisateur',
