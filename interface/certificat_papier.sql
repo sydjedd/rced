@@ -1,8 +1,7 @@
 TRUNCATE TABLE certificat_papier;
 INSERT INTO
-    certificat_papier
+    certificat_papier(lieu_deces_geo_code_departement, lieu_deces_geo_commune, annee_deces, nombre)
 SELECT
-	--COALESCE(codedptlieugeodecesretenu, codedptlieugeodecessaisi, insee_codedptlieugeodeces), -- lieu_deces_geo_code_departement
 	CASE
         WHEN codedptlieugeodecesretenu IS NOT NULL AND codedptlieugeodecesretenu != '00' THEN codedptlieugeodecesretenu
         WHEN codedptlieugeodecessaisi IS NOT NULL AND codedptlieugeodecessaisi != '00' THEN codedptlieugeodecessaisi
@@ -13,7 +12,7 @@ SELECT
     DATE_PART('year', datedecesretenu), -- annee_deces
     COUNT(numcertificat) -- nombre
 FROM
-    referentiel_sref
+    certificat_sref
 WHERE
     DATE_PART('year', datedecesretenu) > 2006
     AND certorigine = '2'

@@ -550,5 +550,5 @@ Y ajouter
 > Adapter le chemin "/rce/rec1/appli/n1"
 
 ```shell
-0 0 * * 0 cd /rce/rec1/appli/n1/interface/; sh /rce/rec1/appli/n1/interface/interface.sh > /dev/null 2>&1
+0 0 * * 0 cd /rce/rec1/appli/n1/interface; sh interface.sh > /dev/null 2>&1
 ```

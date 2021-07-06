@@ -1,9 +1,8 @@
 TRUNCATE TABLE certificat_electronique;
 INSERT INTO
-    certificat_electronique
+    certificat_electronique(id, medecin_declarant, organisme_declarant, volet_complementaire, hors_etablissement, lieu_deces, lieu_deces_geo_code_departement, lieu_deces_geo_commune, date_deces, annee_deces, trimestre_deces, semaine_deces, source)
 SELECT
     numcertificat, -- id
-    --certorigine, -- origine
     certnommedecindeclarant, -- medecin_declarant
     certidentifiantorganismedeclarant, -- organisme_declarant
     certvoletcomplementaire, -- volet_complementaire
@@ -11,7 +10,10 @@ SELECT
     COALESCE(lieudecesretenu, lieudecessaisi, insee_lieudeces), -- lieu_deces
     CASE
         WHEN certidentifiantorganismedeclarant = '1000000002' THEN
-            COALESCE(CodeDptLieuGeoDecesRetenu, CodeDptLieuGeoDecesSaisi)
+            CASE
+                WHEN COALESCE(CodeDptLieuGeoDecesRetenu, CodeDptLieuGeoDecesSaisi) != '978' THEN COALESCE(CodeDptLieuGeoDecesRetenu, CodeDptLieuGeoDecesSaisi)
+                ELSE NULL
+            END
         ELSE
             CASE
                 WHEN SUBSTRING(certidentifiantorganismedeclarant, 1, 2) = '97'   THEN  CONCAT('97',  SUBSTRING(certidentifiantorganismedeclarant, 4, 1))
@@ -22,10 +24,11 @@ SELECT
     UPPER(REPLACE(COALESCE(communelieugeodecesretenu, communelieugeodecessaisi, insee_communelieugeodeces), '-', '')), -- lieu_deces_geo_commune
     datedecesretenu, -- date_deces
     DATE_PART('year', datedecesretenu), -- annee_deces
-    DATE_PART('quarter', datedecesretenu), -- trimestre_deces
+    TO_CHAR(datedecesretenu, 'IW'), -- semaine_deces
+    TO_CHAR(datedecesretenu, 'IYYY'), -- semaine_deces_annee
     sourcedatas -- source
 FROM
-    referentiel_sref
+    certificat_sref
 WHERE
     DATE_PART('year', datedecesretenu) > 2006
     AND certstatuttest = 1
