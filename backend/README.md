@@ -56,10 +56,9 @@ python3 manage.py makemigrations
 python3 manage.py migrate
 ```
 
-### Importer les utilisateurs de test, les groupes et les référentiels
+### Importer les référentiels
 
 ```shell
-python3 manage.py loaddata auth
 python3 manage.py loaddata referentiel
 ```
 
