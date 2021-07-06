@@ -8,3 +8,6 @@
 *.njsproj
 *.sln
 *.sw?
+
+# Log files
+interface.log*

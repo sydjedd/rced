@@ -1,9 +1,5 @@
 .DS_Store
 
-# local env files
-.env.local
-.env.*.local
-
 # Editor directories and files
 .idea
 .vscode
@@ -13,8 +9,13 @@
 *.sln
 *.sw?
 
+# local env files
+.env*
+.env.local
+.env.*.local
+
+
 # Djongo files
 **/migrations
 **/__pycache__
 venv/
-.env*
