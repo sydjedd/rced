@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.views.decorators.http import require_GET
 from django.http import JsonResponse
 from backend.permissions import group_required
-from national.models import CertificatElectronique, CertificatPapier
+from certificat.models import CertificatElectronique, CertificatPapier, CertificatInsee
 from django.db.models import Count, Sum, F, FloatField
 from django.db.models.expressions import Window
 from django.db.models.functions import Lag, Cast, Round
