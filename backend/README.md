@@ -52,7 +52,8 @@ pip3 install -r requirements.txt
 ### Création des tables
 
 ```shell
-python3 manage.py makemigrations
+python3 manage.py makemigrations certificat
+python3 manage.py makemigrations referentiel
 python3 manage.py migrate
 ```
 
