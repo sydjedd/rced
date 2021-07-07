@@ -1,6 +1,6 @@
 TRUNCATE TABLE certificat_electronique;
 INSERT INTO
-    certificat_electronique(id, medecin_declarant, organisme_declarant, volet_complementaire, hors_etablissement, lieu_deces, lieu_deces_geo_code_departement, lieu_deces_geo_commune, date_deces, annee_deces, trimestre_deces, semaine_deces, source)
+    certificat_electronique(id, medecin_declarant, organisme_declarant, volet_complementaire, hors_etablissement, lieu_deces, lieu_deces_geo_code_departement, lieu_deces_geo_commune, date_deces, annee_deces, trimestre_deces, semaine_deces, semaine_deces_annee, source)
 SELECT
     numcertificat, -- id
     certnommedecindeclarant, -- medecin_declarant
@@ -24,8 +24,9 @@ SELECT
     UPPER(REPLACE(COALESCE(communelieugeodecesretenu, communelieugeodecessaisi, insee_communelieugeodeces), '-', '')), -- lieu_deces_geo_commune
     datedecesretenu, -- date_deces
     DATE_PART('year', datedecesretenu), -- annee_deces
-    TO_CHAR(datedecesretenu, 'IW'), -- semaine_deces
-    TO_CHAR(datedecesretenu, 'IYYY'), -- semaine_deces_annee
+    DATE_PART('quarter', datedecesretenu), -- trimestre_deces
+    TO_CHAR(datedecesretenu, 'IW')::INTEGER, -- semaine_deces
+    TO_CHAR(datedecesretenu, 'IYYY')::INTEGER, -- semaine_deces_annee
     sourcedatas -- source
 FROM
     certificat_sref
