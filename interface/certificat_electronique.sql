@@ -1,6 +1,6 @@
 TRUNCATE TABLE certificat_electronique;
 INSERT INTO
-    certificat_electronique(id, medecin_declarant, organisme_declarant, volet_complementaire, hors_etablissement, lieu_deces, lieu_deces_geo_code_departement, lieu_deces_geo_commune, date_deces, annee_deces, trimestre_deces, semaine_deces, semaine_deces_annee, source)
+    certificat_electronique(id, medecin_declarant, organisme_declarant, volet_complementaire, hors_etablissement, lieu_deces, departement, commune, date_deces, annee_deces, trimestre_deces, semaine_deces, semaine_deces_annee, source)
 SELECT
     numcertificat, -- id
     certnommedecindeclarant, -- medecin_declarant
@@ -20,8 +20,8 @@ SELECT
                 WHEN SUBSTRING(certidentifiantorganismedeclarant, 1, 4) = '9805' THEN '976'
                 ELSE SUBSTRING(certidentifiantorganismedeclarant, 1, 2)
             END
-    END, -- lieu_deces_geo_code_departement
-    UPPER(REPLACE(COALESCE(communelieugeodecesretenu, communelieugeodecessaisi, insee_communelieugeodeces), '-', '')), -- lieu_deces_geo_commune
+    END, -- departement
+    UPPER(REPLACE(COALESCE(communelieugeodecesretenu, communelieugeodecessaisi, insee_communelieugeodeces), '-', '')), -- commune
     datedecesretenu, -- date_deces
     DATE_PART('year', datedecesretenu), -- annee_deces
     DATE_PART('quarter', datedecesretenu), -- trimestre_deces
