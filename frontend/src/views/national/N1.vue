@@ -11,9 +11,11 @@
     </v-card>
 
     <v-alert dense dismissible border="left" type="warning">
-      Attention, l'année considérée est l'année de décès. Les données de 2017 et
-      suivantes ne sont pas finalisées (doublons non enlevés). En rouge les
-      données sont provisoires (retard dans la réception des certificats papier)
+      Attention, l'année considérée est l'année de décès.
+      <br>
+      Les données de 2017 et suivantes ne sont pas finalisées (doublons non enlevés).
+      <br>
+      En rouge les données sont provisoires (retard dans la réception des certificats papier).
     </v-alert>
 
     <v-card>

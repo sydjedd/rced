@@ -8,7 +8,7 @@ import Login from '@/views/Login.vue'
 import Profile from '@/views/Profile.vue'
 import National from '@/views/national/National.vue'
 import N1 from '@/views/national/N1.vue'
-// import N2 from '@/views/national/N2.vue'
+import N2 from '@/views/national/N2.vue'
 import N3 from '@/views/national/N3.vue'
 /*
 import N4 from '@/views/national/N4.vue'
@@ -35,7 +35,7 @@ const router = new VueRouter({
     { path: '/profile', name: 'Profil', component: Profile, meta: { auth: true, loggedOnly: true } },
     { path: '/national', name: 'National', component: National, meta: { auth: true, loggedOnly: true } },
     { path: '/n1', name: 'N1 - Nombre et taux de certificats électroniques par an', component: N1, meta: { auth: true, loggedOnly: true } },
-    // { path: '/n2', name: 'N2 - Nombre et taux de certificats électroniques en 2020', component: N2, meta: { auth: true, loggedOnly: true } },
+    { path: '/n2', name: 'N2 - Nombre et taux de certificats électroniques depuis 2020', component: N2, meta: { auth: true, loggedOnly: true } },
     { path: '/n3', name: 'N3 - Evolution du nombre de décès déclarés par voie électronique par région, par département et par an', component: N3, meta: { auth: true, loggedOnly: true } },
     /*
     { path: '/n4', name: 'n4', component: N4, meta: { auth: true, loggedOnly: true } },

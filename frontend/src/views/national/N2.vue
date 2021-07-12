@@ -11,9 +11,11 @@
     </v-card>
 
     <v-alert dense dismissible border="left" type="warning">
-      Attention, l'année considérée est l'année de décès. Les données de 2017 et
-      suivantes ne sont pas finalisées (doublons non enlevés). En rouge les
-      données sont provisoires (retard dans la réception des certificats papier)
+      Le nombre de certificats électroniques est issu de CertDC.
+      <br>
+      Le nombre de certificats papier est déduit du nombre total de décès mis à disposition par <a href="https://www.data.gouv.fr/fr/datasets/fichier-des-personnes-decedees" target="_blank" class="text-decoration-none">l'INSEE</a>.
+      <br>
+      L'année considérée est celle du décès (et non celle d'établissement du certificat par le médecin).
     </v-alert>
 
     <v-card>
@@ -29,37 +31,26 @@
 </template>
 
 <script>
-/*
 import N20 from '@/components/national/N20'
 import N21 from '@/components/national/N21'
 import N22 from '@/components/national/N22'
-import N23 from '@/components/national/N23'
-import N24 from '@/components/national/N24'
-import N25 from '@/components/national/N25'
 
 export default {
   name: 'National',
   components: {
     N20,
     N21,
-    N22,
-    N23,
-    N24,
-    N25
+    N22
   },
   data () {
     return {
       currentItem: 0,
       items: [
-        { title: 'N2-0 Taux de certification électronique et nombre de certificats en 2020', component: 'N20' },
-        { title: 'N2-1 Nombre de certificats par région en 2020', component: 'N21' },
-        { title: 'N2-2 Nombre de certificats par région et par département en 2020', component: 'N22' },
-        { title: 'N2-3 Taux de certification électronique par région en 2020', component: 'N23' },
-        { title: 'N2-4 Taux de certification électronique et nombre de certificats par région en 2020', component: 'N24' },
-        { title: 'N2-5 Taux de certification électronique par région et par département en 2020', component: 'N25' }
+        { title: 'N2-0 Nombre et taux de certification électronique depuis 2020', component: 'N20' },
+        { title: 'N2-1 Nombre et taux de certification électronique par région depuis 2020', component: 'N21' },
+        { title: 'N2-2 Nombre et taux de certification électronique par département depuis 2020', component: 'N22' }
       ]
     }
   }
 }
-*/
 </script>
