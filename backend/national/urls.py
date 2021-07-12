@@ -7,5 +7,8 @@ urlpatterns = [
     path('n11/', views.National11View, name = 'n11'),
     path('n12/', views.National12View, name = 'n12'),
     path('n13/', views.National13View, name = 'n13'),
+    path('n20/', views.National20View, name = 'n20'),
+    path('n21/', views.National21View, name = 'n21'),
+    path('n22/', views.National22View, name = 'n22'),
     path('n30/', views.National30View, name = 'n30'),
 ]
