@@ -124,11 +124,6 @@
 </template>
 
 <style scoped>
-.v-card .v-card__title {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 ::v-deep .sticky .v-data-table__wrapper {
   max-height: calc(100vh - 104px);
 }
@@ -144,7 +139,7 @@ td.border-left {
   border-left: solid 1px rgba(0, 0, 0, 0.12) !important;
 }
 .sticky table thead tr:first-child th:first-child .v-input {
-  width: 190px;
+  width: 200px;
 }
 .sticky table tbody tr th:first-child,
 .sticky table thead tr:first-child th:first-child {

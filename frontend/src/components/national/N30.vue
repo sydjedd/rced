@@ -14,113 +14,36 @@
     >
       <template v-slot:default>
         <thead>
-          <tr class="text-uppercase">
-            <th class="primary text-none" rowspan="2">
-              <v-text-field
-                full-width
-                v-model="filter"
-                placeholder="Ain, Var..."
-                hide-details
-                solo
-                dense
-                flat
-                clearable
-                prepend-inner-icon="mdi-magnify"
-              ></v-text-field>
+          <tr>
+            <th class="primary text-none border-right" rowspan="2">
+              <v-text-field full-width v-model="filter" placeholder="Ain, Var..." hide-details solo dense flat clearable prepend-inner-icon="mdi-magnify"></v-text-field>
             </th>
-            <th
-              class="white--text text-center primary border-left"
-              colspan="2"
-              v-for="(annee, indexAnnee) in n30.annee"
-              :key="indexAnnee"
-            >
-              {{ annee }}
-            </th>
+            <th class="primary white--text text-center border-left" v-for="(annee, indexAnnee) in n30.annee" :key="indexAnnee" colspan="2">{{ annee }}</th>
           </tr>
-          <tr class="text-uppercase">
+          <tr>
             <template v-for="(annee, indexAnnee) in n30.annee">
-              <th
-                class="white--text text-center primary border-left"
-                :key="indexAnnee + '1'"
-              >
-                nombre
-              </th>
-              <th
-                class="white--text text-center primary"
-                :key="indexAnnee + '2'"
-              >
-                evolution
-              </th>
+              <th class="primary white--text text-center text-uppercase border-left" :key="indexAnnee + '1'">nombre</th>
+              <th class="primary white--text text-center text-uppercase" :key="indexAnnee + '2'">evolution</th>
             </template>
           </tr>
         </thead>
         <tbody>
-          <tr
-            v-for="(departement, indexDepartement) in n30.departement"
-            :key="indexDepartement"
-          >
-            <th class="text-no-wrap">{{ indexDepartement }}</th>
+          <tr v-for="(departement, indexDepartement) in n30.departement" :key="indexDepartement">
+            <th class="text-no-wrap border-right">{{ indexDepartement }}</th>
             <template v-for="(annee, indexAnnee) in n30.annee">
-              <td
-                class="text-right border-left"
-                :key="indexDepartement + indexAnnee + '1'"
-                :title="indexDepartement + ' - ' + annee + ' - Nombre'"
-              >
-                {{ departement[annee] ? departement[annee]['nombre'] : '' }}
-              </td>
-              <td
-                class="text-right"
-                :class="
-                  Number(
-                    departement[annee]
-                      ? departement[annee]['evolution'] || 0
-                      : 0
-                  ) > 5
-                    ? 'green--text'
-                    : Number(
-                        departement[annee]
-                          ? departement[annee]['evolution'] || 0
-                          : 0
-                      ) < -5
-                    ? 'red--text'
-                    : ''
-                "
-                :key="indexDepartement + indexAnnee + '2'"
-                :title="indexDepartement + ' - ' + annee + ' - Evolution'"
-              >
-                {{
-                  departement[annee]
-                    ? departement[annee]['evolution']
-                      ? departement[annee]['evolution'] + '%'
-                      : ''
-                    : ''
-                }}
+              <td class="text-right border-left" :key="indexDepartement + indexAnnee + '1'" :title="indexDepartement + ' - ' + annee + ' - Nombre'">{{ departement[annee] ? departement[annee]['nombre'] : '' }}</td>
+              <td class="text-right" :class="Number(departement[annee] ? (departement[annee]['evolution'] || 0) : 0) > 5 ? 'green--text' : Number(departement[annee] ? (departement[annee]['evolution'] || 0) : 0) < -5 ? 'red--text' : ''" :key="indexDepartement + indexAnnee + '2'" :title="indexDepartement + ' - ' + annee + ' - Evolution'">
+                {{ departement[annee] ? (departement[annee]['evolution'] ? departement[annee]['evolution'] + '%' : '') : '' }}
               </td>
             </template>
           </tr>
         </tbody>
-        <!--tfoot>
-          <tr class="text-uppercase primary">
-            <th class="white--text">Total</th>
-            <th  class="white--text text-right" v-for="(value, index) in dataN3.annee" :key="index">{{
-                (dataN3.enEtablissement[value][1] || 0)
-              + (dataN3.enEtablissement[value][2] || 0)
-              + (dataN3.enEtablissement[value][3] || 0)
-              + (dataN3.enEtablissement[value][4] || 0)
-            }}</th>
-          </tr>
-        </tfoot-->
       </template>
     </v-simple-table>
   </div>
 </template>
 
 <style scoped>
-.v-card .v-card__title {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 ::v-deep .sticky .v-data-table__wrapper {
   max-height: calc(100vh - 104px);
 }
@@ -135,8 +58,12 @@ th.border-left,
 td.border-left {
   border-left: solid 1px rgba(0, 0, 0, 0.12) !important;
 }
+th.border-right,
+td.border-right {
+  border-right: solid 1px rgba(0, 0, 0, 0.12) !important;
+}
 .sticky table thead tr:first-child th:first-child .v-input {
-  width: 190px;
+  width: 200px;
 }
 .sticky table tbody tr th:first-child,
 .sticky table thead tr:first-child th:first-child {
@@ -146,13 +73,13 @@ td.border-left {
   position: -o-sticky;
   position: sticky;
   left: 0;
-}
-.sticky table tbody tr th:first-child {
-  z-index: 2;
-  background-color: #fff;
+  z-index: 1;
 }
 .sticky table thead tr:first-child th:first-child {
   z-index: 3;
+}
+.sticky table tbody tr th:first-child {
+  background-color: #fff;
 }
 </style>
 
@@ -180,9 +107,8 @@ export default {
     n30: {
       get () {
         return {
-          loading: this.$store.state.national.loading,
-          departement: this.$store.getters['national/n30Departement'],
-          annee: this.$store.state.national.n30.annee
+          annee: this.$store.state.national.n30.annee,
+          departement: this.$store.getters['national/n30']
         }
       }
     }
