@@ -3,13 +3,13 @@ from django.views.decorators.http import require_GET
 from django.http import JsonResponse
 from backend.permissions import group_required
 from certificat.models import CertificatElectronique, CertificatPapier, CertificatInsee
-from django.db.models import Count, Sum, F, FloatField
+from django.db.models import Count, Sum, Max, Min, F, FloatField, DateField
 from django.db.models.expressions import Window
-from django.db.models.functions import Lag, Cast, Round
+from django.db.models.functions import Lag, Cast, Round, Trunc
 
 
-#@require_GET
 @login_required
+#@require_GET
 #@group_required('national')
 #@permission_required('national.view_t1')
 def National10View(request):
@@ -19,6 +19,7 @@ def National10View(request):
                 CertificatElectronique.objects
                     .values('annee_deces')
                     .annotate(nombre = Count('id'))
+                    .order_by('annee_deces')
             )
         ,
         'papier' :
@@ -26,6 +27,7 @@ def National10View(request):
                 CertificatPapier.objects
                     .values('annee_deces')
                     .annotate(nombre = Sum('nombre'))
+                    .order_by('annee_deces')
             )
         ,
     }, safe = False)
@@ -57,15 +59,16 @@ def National11View(request):
 def National12View(request):
     return JsonResponse({
         'enEtablissement' :
-            list(CertificatElectronique.objects
-                .values('annee_deces', 'trimestre_deces')
-                .annotate(
-                    region_id = F('lieu_deces_geo_code_departement__region_id'),
-                    region_libelle = F('lieu_deces_geo_code_departement__region__libelle'),
-                    nombre = Count('id')
-                )
-                .filter(hors_etablissement = 0)
-                .order_by('lieu_deces_geo_code_departement__region__libelle', 'annee_deces', 'trimestre_deces')
+            list(
+                CertificatElectronique.objects
+                    .values('annee_deces', 'trimestre_deces')
+                    .annotate(
+                        region_id = F('departement__region_id'),
+                        region_libelle = F('departement__region__libelle'),
+                        nombre = Count('id')
+                    )
+                    .filter(hors_etablissement = 0)
+                    .order_by('departement__region__libelle', 'annee_deces', 'trimestre_deces')
             )
         ,
     }, safe = False)
@@ -74,11 +77,103 @@ def National12View(request):
 def National13View(request):
     return JsonResponse({
         'enEtablissement' :
-            list(CertificatElectronique.objects
-                .values('annee_deces', 'trimestre_deces')
-                .annotate(nombre = Count('id'))
-                .filter(hors_etablissement = 0)
-                .order_by('annee_deces', 'trimestre_deces')
+            list(
+                CertificatElectronique.objects
+                    .values('annee_deces', 'trimestre_deces')
+                    .annotate(nombre = Count('id'))
+                    .filter(hors_etablissement = 0)
+                    .order_by('annee_deces', 'trimestre_deces')
+            )
+        ,
+    }, safe = False)
+
+@login_required
+def National20View(request):
+    return JsonResponse({
+        'electronique' :
+            list(
+                CertificatElectronique.objects
+                    .values('semaine_deces_annee', 'semaine_deces')
+                    .annotate(
+                        nombre = Count('id'),
+                        date_deces_debut = Trunc(Min('date_deces'), 'day', output_field = DateField()),
+                        date_deces_fin = Trunc(Max('date_deces'), 'day', output_field = DateField())
+                    )
+                    .filter(semaine_deces_annee__in = [2020, 2021])
+            )
+        ,
+        'total' :
+            list(
+                CertificatInsee.objects
+                    .values('semaine_deces_annee', 'semaine_deces')
+                    .annotate(
+                        nombre = Count('id'),
+                        date_deces_debut = Trunc(Min('date_deces'), 'day', output_field = DateField()),
+                        date_deces_fin = Trunc(Max('date_deces'), 'day', output_field = DateField())
+                    )
+                    .filter(semaine_deces_annee__in = [2020, 2021])
+            )
+        ,
+    }, safe = False)
+
+@login_required
+def National21View(request):
+    return JsonResponse({
+        'electronique' :
+            list(
+                CertificatElectronique.objects
+                    .values('semaine_deces_annee', 'semaine_deces')
+                    .annotate(
+                        region_id = F('departement__region_id'),
+                        region_libelle = F('departement__region__libelle'),
+                        nombre = Count('id')
+                    )
+                    .filter(semaine_deces_annee__gte = 2020)
+                    .order_by('departement__region__libelle', 'semaine_deces_annee', 'semaine_deces')
+            )
+        ,
+        'total' :
+            list(
+                CertificatInsee.objects
+                    .values('semaine_deces_annee', 'semaine_deces')
+                    .annotate(
+                        region_id = F('departement__region_id'),
+                        region_libelle = F('departement__region__libelle'),
+                        nombre = Count('id')
+                    )
+                    .filter(semaine_deces_annee__gte = 2020)
+                    .order_by('departement__region__libelle', 'semaine_deces_annee', 'semaine_deces')
+            )
+        ,
+    }, safe = False)
+
+@login_required
+def National22View(request):
+    return JsonResponse({
+        'electronique' :
+            list(
+                CertificatElectronique.objects
+                    .values('semaine_deces_annee', 'semaine_deces')
+                    .annotate(
+                        departement_id = F('departement__id'),
+                        departement_libelle = F('departement__libelle'),
+                        nombre = Count('id'),
+                    )
+                    .filter(semaine_deces_annee__gte = 2020)
+                    .order_by('departement__id', 'semaine_deces_annee', 'semaine_deces')
+            )
+        ,
+        'total' :
+            list(
+                CertificatInsee.objects
+                    .values('semaine_deces_annee', 'semaine_deces')
+                    .annotate(
+                        departement_id = F('departement__id'),
+                        departement_libelle = F('departement__libelle'),
+                        nombre = Count('id'),
+                    )
+                    .filter(semaine_deces_annee__gte = 2020)
+                    .order_by('departement__id', 'semaine_deces_annee', 'semaine_deces')
             )
         ,
     }, safe = False)
@@ -87,15 +182,16 @@ def National13View(request):
 def National30View(request):
     return JsonResponse({
         'electronique' :
-            list(CertificatElectronique.objects
-                .values('annee_deces')
-                .annotate(
-                    departement_id = F('lieu_deces_geo_code_departement__id'),
-                    departement_libelle = F('lieu_deces_geo_code_departement__libelle'),
-                    nombre = Count('id'),
-                    evolution = Round((F('nombre') - Window(expression = Lag(Count('id')), partition_by = [F('lieu_deces_geo_code_departement')], order_by = [F('annee_deces')])) * Cast(100, output_field=FloatField()) / Window(expression = Lag(Count('id')), partition_by = [F('lieu_deces_geo_code_departement')], order_by = [F('annee_deces')]))
-                )
-                .order_by('lieu_deces_geo_code_departement__id', 'annee_deces')
+            list(
+                CertificatElectronique.objects
+                    .values('annee_deces')
+                    .annotate(
+                        departement_id = F('departement__id'),
+                        departement_libelle = F('departement__libelle'),
+                        nombre = Count('id'),
+                        evolution = Round((F('nombre') - Window(expression = Lag(Count('id')), partition_by = [F('departement')], order_by = [F('annee_deces')])) * Cast(100, output_field = FloatField()) / Window(expression = Lag(Count('id')), partition_by = [F('departement')], order_by = [F('annee_deces')]))
+                    )
+                    .order_by('departement__id', 'annee_deces')
             )
         ,
     }, safe = False)
