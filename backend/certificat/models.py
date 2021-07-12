@@ -8,8 +8,8 @@ class CertificatElectronique(models.Model):
     volet_complementaire = models.SmallIntegerField(blank=True, null=True)
     hors_etablissement = models.SmallIntegerField(blank=True, null=True)
     lieu_deces = models.SmallIntegerField(blank=True, null=True)
-    lieu_deces_geo_code_departement = models.ForeignKey('referentiel.Departement', models.DO_NOTHING, blank=True, null=True, db_column='lieu_deces_geo_code_departement')
-    lieu_deces_geo_commune = models.CharField(max_length=55, blank=True, null=True)
+    departement = models.ForeignKey('referentiel.Departement', models.DO_NOTHING, blank=True, null=True, db_column='departement')
+    commune = models.CharField(max_length=55, blank=True, null=True)
     date_deces = models.DateTimeField(blank=True, null=True)
     annee_deces = models.SmallIntegerField(blank=True, null=True)
     trimestre_deces = models.SmallIntegerField(blank=True, null=True)
@@ -22,8 +22,8 @@ class CertificatElectronique(models.Model):
 
 
 class CertificatPapier(models.Model):
-    lieu_deces_geo_code_departement = models.ForeignKey('referentiel.Departement', models.DO_NOTHING, blank=True, null=True, db_column='lieu_deces_geo_code_departement')
-    lieu_deces_geo_commune = models.CharField(max_length=55, blank=True, null=True)
+    departement = models.ForeignKey('referentiel.Departement', models.DO_NOTHING, blank=True, null=True, db_column='departement')
+    commune = models.CharField(max_length=55, blank=True, null=True)
     annee_deces = models.SmallIntegerField(blank=True, null=True)
     nombre = models.IntegerField(blank=True, null=True)
 
@@ -32,7 +32,7 @@ class CertificatPapier(models.Model):
 
 
 class CertificatInsee(models.Model):
-    departement = models.ForeignKey('referentiel.Departement', models.DO_NOTHING, blank=True, null=True, db_column='lieu_deces_geo_code_departement')
+    departement = models.ForeignKey('referentiel.Departement', models.DO_NOTHING, blank=True, null=True, db_column='departement')
     date_deces = models.DateTimeField(blank=True, null=True)
     annee_deces = models.SmallIntegerField(blank=True, null=True)
     semaine_deces = models.SmallIntegerField(blank=True, null=True)
