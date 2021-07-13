@@ -11,7 +11,7 @@ SELECT
     CASE
         WHEN certidentifiantorganismedeclarant = '1000000002' THEN
             CASE
-                WHEN COALESCE(CodeDptLieuGeoDecesRetenu, CodeDptLieuGeoDecesSaisi) != '978' THEN COALESCE(CodeDptLieuGeoDecesRetenu, CodeDptLieuGeoDecesSaisi)
+                WHEN COALESCE(codedptlieugeodecesretenu, codedptlieugeodecessaisi) != '978' THEN COALESCE(codedptlieugeodecesretenu, codedptlieugeodecessaisi)
                 ELSE NULL
             END
         ELSE
