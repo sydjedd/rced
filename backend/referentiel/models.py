@@ -31,7 +31,7 @@ class Departement(models.Model):
 
 
 class LieuDeces(models.Model):
-    id = models.CharField(primary_key=True, max_length=2)
+    id = models.SmallIntegerField(primary_key=True)
     libelle = models.CharField(max_length=30)
 
     class Meta:
