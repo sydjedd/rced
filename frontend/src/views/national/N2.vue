@@ -46,9 +46,9 @@ export default {
     return {
       currentItem: 0,
       items: [
-        { title: 'N2-0 Nombre et taux de certification électronique depuis 2020', component: 'N20' },
-        { title: 'N2-1 Nombre et taux de certification électronique par région depuis 2020', component: 'N21' },
-        { title: 'N2-2 Nombre et taux de certification électronique par département depuis 2020', component: 'N22' }
+        { title: 'N2-0 Nombre et taux de certificats électroniques depuis 2020', component: 'N20' },
+        { title: 'N2-1 Nombre et taux de certificats électroniques par région depuis 2020', component: 'N21' },
+        { title: 'N2-2 Nombre et taux de certificats électroniques par département depuis 2020', component: 'N22' }
       ]
     }
   }
