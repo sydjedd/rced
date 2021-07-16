@@ -1,7 +1,8 @@
 TRUNCATE TABLE certificat_papier;
 INSERT INTO
-    certificat_papier(departement, commune, annee_deces, nombre)
+    certificat_papier(lieu_deces, departement, commune, annee_deces, nombre)
 SELECT
+    COALESCE(lieudecesretenu, lieudecessaisi, insee_lieudeces), -- lieu_deces
     CASE
         WHEN codedptlieugeodecesretenu IS NOT NULL AND codedptlieugeodecesretenu IN (SELECT id FROM referentiel_departement) THEN codedptlieugeodecesretenu
         WHEN codedptlieugeodecessaisi IS NOT NULL AND codedptlieugeodecessaisi IN (SELECT id FROM referentiel_departement) THEN codedptlieugeodecessaisi
@@ -20,5 +21,6 @@ WHERE
 GROUP BY
     1,
     2,
-    3
+    3,
+    4
 ;
