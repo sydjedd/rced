@@ -7,7 +7,8 @@ class CertificatElectronique(models.Model):
     organisme_declarant = models.CharField(max_length=10, blank=True, null=True)
     volet_complementaire = models.SmallIntegerField(blank=True, null=True)
     hors_etablissement = models.SmallIntegerField(blank=True, null=True)
-    lieu_deces = models.SmallIntegerField(blank=True, null=True)
+    #lieu_deces = models.SmallIntegerField(blank=True, null=True)
+    lieu_deces = models.ForeignKey('referentiel.LieuDeces', models.DO_NOTHING, blank=True, null=True, db_column='lieu_deces')
     departement = models.ForeignKey('referentiel.Departement', models.DO_NOTHING, blank=True, null=True, db_column='departement')
     commune = models.CharField(max_length=55, blank=True, null=True)
     date_deces = models.DateTimeField(blank=True, null=True)
@@ -22,6 +23,7 @@ class CertificatElectronique(models.Model):
 
 
 class CertificatPapier(models.Model):
+    lieu_deces = models.ForeignKey('referentiel.LieuDeces', models.DO_NOTHING, blank=True, null=True, db_column='lieu_deces')
     departement = models.ForeignKey('referentiel.Departement', models.DO_NOTHING, blank=True, null=True, db_column='departement')
     commune = models.CharField(max_length=55, blank=True, null=True)
     annee_deces = models.SmallIntegerField(blank=True, null=True)
