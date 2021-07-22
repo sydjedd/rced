@@ -35,7 +35,8 @@ else:
 urlpatterns = [
     path('admin/', admin.site.urls, name = 'admin'),
     path('auth/', include('authentication.urls'), name = 'auth'),
-    path('national/', include('national.urls'), name = 'national'),
+    path('referentiel/', include('referentiel.urls'), name = 'referentiel'),
+    path('national/', include('national.urls'), name = 'national')
     #path('accounts/', include('django.contrib.auth.urls')),
     #path('', index, name='index'),
     #re_path(r'^.*$', index, name='index'),

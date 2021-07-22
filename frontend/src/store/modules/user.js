@@ -1,3 +1,4 @@
+import store from '@/store'
 import userService from '@/services/user'
 
 export default {
@@ -24,6 +25,10 @@ export default {
       state.is_staff = newValue.is_staff
       state.is_superuser = newValue.is_superuser
       state.is_logged = true
+      // TODO trouver une meilleur place pour la mise a jour des referentiels
+      store.dispatch('referentiel/updateRegion')
+      store.dispatch('referentiel/updateDepartement')
+      store.dispatch('referentiel/updateLieuDeces')
     },
     REMOVE_USER (state) {
       localStorage.removeItem('first_name')
