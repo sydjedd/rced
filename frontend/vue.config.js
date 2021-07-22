@@ -8,7 +8,7 @@ module.exports = {
   productionSourceMap: false,
   devServer: {
     proxy: {
-      '^/(auth|admin|national|regional|etablissement)/.*$': {
+      '^/(auth|admin|referentiel|national|regional|etablissement)/.*$': {
         target: process.env.BACKEND_URL,
         changeOrigin: true
       }
