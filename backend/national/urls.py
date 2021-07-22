@@ -11,4 +11,8 @@ urlpatterns = [
     path('n21/', views.National21View, name = 'n21'),
     path('n22/', views.National22View, name = 'n22'),
     path('n30/', views.National30View, name = 'n30'),
+    path('n50/', views.National50View, name = 'n50'),
+    path('n51/', views.National51View, name = 'n51'),
+    path('n52/', views.National52View, name = 'n52'),
+    path('n53/', views.National53View, name = 'n53'),
 ]

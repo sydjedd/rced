@@ -10,9 +10,9 @@ import National from '@/views/national/National.vue'
 import N1 from '@/views/national/N1.vue'
 import N2 from '@/views/national/N2.vue'
 import N3 from '@/views/national/N3.vue'
+import N5 from '@/views/national/N5.vue'
 /*
 import N4 from '@/views/national/N4.vue'
-import N5 from '@/views/national/N5.vue'
 import N6 from '@/views/national/N6.vue'
 import N7 from '@/views/national/N7.vue'
 import N8 from '@/views/national/N8.vue'
@@ -37,9 +37,9 @@ const router = new VueRouter({
     { path: '/n1', name: 'N1 - Nombre et taux de certificats électroniques par an', component: N1, meta: { auth: true, loggedOnly: true } },
     { path: '/n2', name: 'N2 - Nombre et taux de certificats électroniques depuis 2020', component: N2, meta: { auth: true, loggedOnly: true } },
     { path: '/n3', name: 'N3 - Evolution du nombre de décès déclarés par voie électronique par région, par département et par an', component: N3, meta: { auth: true, loggedOnly: true } },
+    { path: '/n5', name: 'N5 - Taux de certification électronique par région avant 2020', component: N5, meta: { auth: true, loggedOnly: true } },
     /*
     { path: '/n4', name: 'n4', component: N4, meta: { auth: true, loggedOnly: true } },
-    { path: '/n5', name: 'n5', component: N5, meta: { auth: true, loggedOnly: true } },
     { path: '/n6', name: 'n6', component: N6, meta: { auth: true, loggedOnly: true } },
     { path: '/n7', name: 'n7', component: N7, meta: { auth: true, loggedOnly: true } },
     { path: '/n8', name: 'n8', component: N8, meta: { auth: true, loggedOnly: true } },
