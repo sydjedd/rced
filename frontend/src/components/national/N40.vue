@@ -120,6 +120,10 @@
         </v-simple-table>
       </v-card-text>
     </v-card>
+
+    <v-btn color="primary" small fixed bottom right fab @click="exportXLS('n40')">
+      <v-icon>mdi-download</v-icon>
+    </v-btn>
   </div>
 </template>
 
@@ -160,6 +164,8 @@ td.border-left {
 </style>
 
 <script>
+import exportHelper from '@/helpers/export'
+
 export default {
   data () {
     return {
@@ -194,6 +200,11 @@ export default {
     this.loading = true
     await this.$store.dispatch('national/n40')
     this.loading = false
+  },
+  methods: {
+    exportXLS (tableName = '') {
+      exportHelper.exportXLS(tableName, this.$refs[tableName].$el.querySelector('table').outerHTML)
+    }
   },
   mounted () {
     this.skeletonLoader = Math.floor(

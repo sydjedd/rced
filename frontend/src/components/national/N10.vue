@@ -7,6 +7,7 @@
     ></v-skeleton-loader>
 
     <v-simple-table
+      ref="n10"
       v-if="!loading"
     >
       <template v-slot:default>
@@ -14,29 +15,20 @@
           <tr class="text-uppercase primary">
             <th class="white--text"></th>
             <th
-              class="white--text text-center"
-              v-for="(annee, indexAnnee) in n10.annee"
-              :key="indexAnnee"
-            >
-              {{ annee }}
-            </th>
+              class="white--text text-center" v-for="(annee, indexAnnee) in n10.annee" :key="indexAnnee">{{ annee }}</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <th class="text-uppercase">Électronique</th>
             <template v-for="(annee, indexAnnee) in n10.annee">
-              <td class="text-right" :key="indexAnnee + '1'">
-                {{ n10.electronique[annee] }}
-              </td>
+              <td class="text-right" :key="indexAnnee + '1'">{{ n10.electronique[annee] }}</td>
             </template>
           </tr>
           <tr>
             <th class="text-uppercase">Papier</th>
             <template v-for="(annee, indexAnnee) in n10.annee">
-              <td class="text-right" :key="indexAnnee + '1'">
-                {{ n10.papier[annee] }}
-              </td>
+              <td class="text-right" :key="indexAnnee + '1'">{{ n10.papier[annee] }}</td>
             </template>
           </tr>
           <tr class="text-uppercase primary">
@@ -46,45 +38,21 @@
           </tr>
           <tr>
             <th class="text-uppercase">Électronique</th>
-            <td
-              class="text-right"
-              v-for="(annee, indexAnnee) in n10.annee"
-              :key="indexAnnee"
-            >
-              {{
-                (
-                  (n10.electronique[annee] /
-                    (n10.electronique[annee] + n10.papier[annee])) *
-                  100
-                ).toFixed(2)
-              }}%
+            <td class="text-right" v-for="(annee, indexAnnee) in n10.annee" :key="indexAnnee">
+              {{ ((n10.electronique[annee] / (n10.electronique[annee] + n10.papier[annee])) * 100 ).toFixed(2) }}%
             </td>
           </tr>
           <tr>
             <th class="text-uppercase">Papier</th>
-            <td
-              class="text-right"
-              v-for="(annee, indexAnnee) in n10.annee"
-              :key="indexAnnee"
-            >
-              {{
-                (
-                  (n10.papier[annee] /
-                    (n10.electronique[annee] + n10.papier[annee])) *
-                  100
-                ).toFixed(2)
-              }}%
+            <td class="text-right" v-for="(annee, indexAnnee) in n10.annee" :key="indexAnnee">
+              {{ ((n10.papier[annee] / (n10.electronique[annee] + n10.papier[annee])) * 100).toFixed(2) }}%
             </td>
           </tr>
         </tbody>
         <tfoot>
           <tr class="text-uppercase primary">
             <th class="white--text">Total</th>
-            <th
-              class="white--text text-center"
-              v-for="(annee, indexAnnee) in n10.annee"
-              :key="indexAnnee"
-            >
+            <th class="white--text text-center" v-for="(annee, indexAnnee) in n10.annee" :key="indexAnnee">
               {{ (n10.electronique[annee] || 0) + (n10.papier[annee] || 0) }}
             </th>
           </tr>
@@ -105,10 +73,15 @@
       :chart-data="chartData"
       :options="options"
     ></bar-chart>
+
+    <v-btn color="primary" small fixed bottom right fab @click="exportXLS('n10')">
+      <v-icon>mdi-download</v-icon>
+    </v-btn>
   </div>
 </template>
 
 <script>
+import exportHelper from '@/helpers/export'
 import BarChart from '@/components/chart/BarChart'
 
 export default {
@@ -199,15 +172,7 @@ export default {
               type: 'bar',
               yAxisID: 'taux',
               label: '% Électronique',
-              data: Object.keys(this.$store.state.national.n10.electronique).map(
-                (annee) =>
-                  (
-                    (this.$store.state.national.n10.electronique[annee] /
-                      (this.$store.state.national.n10.electronique[annee] +
-                        this.$store.state.national.n10.papier[annee])) *
-                    100
-                  ).toFixed(2)
-              ),
+              data: Object.keys(this.$store.state.national.n10.electronique).map((annee) => ((this.$store.state.national.n10.electronique[annee] / (this.$store.state.national.n10.electronique[annee] + this.$store.state.national.n10.papier[annee])) * 100).toFixed(2)),
               borderWidth: '3',
               borderColor: 'lightblue',
               backgroundColor: 'lightblue'
@@ -216,15 +181,7 @@ export default {
               type: 'bar',
               yAxisID: 'taux',
               label: '% Papier',
-              data: Object.keys(this.$store.state.national.n10.papier).map(
-                (annee) =>
-                  (
-                    (this.$store.state.national.n10.papier[annee] /
-                      (this.$store.state.national.n10.electronique[annee] +
-                        this.$store.state.national.n10.papier[annee])) *
-                    100
-                  ).toFixed(2)
-              ),
+              data: Object.keys(this.$store.state.national.n10.papier).map((annee) => ((this.$store.state.national.n10.papier[annee] / (this.$store.state.national.n10.electronique[annee] + this.$store.state.national.n10.papier[annee])) * 100).toFixed(2)),
               borderWidth: '3',
               borderColor: 'lightcoral',
               backgroundColor: 'lightcoral'
@@ -232,6 +189,11 @@ export default {
           ]
         }
       }
+    }
+  },
+  methods: {
+    exportXLS (tableName = '') {
+      exportHelper.exportXLS(tableName, this.$refs[tableName].$el.querySelector('table').outerHTML)
     }
   },
   async created () {

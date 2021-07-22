@@ -7,55 +7,31 @@
     ></v-skeleton-loader>
 
     <v-simple-table
+      ref="n11"
       v-if="!loading"
     >
       <template v-slot:default>
         <thead>
           <tr class="text-uppercase primary">
             <th class="white--text"></th>
-            <th
-              class="white--text text-right"
-              v-for="(annee, indexAnnee) in n11.annee"
-              :key="indexAnnee"
-            >
-              {{ annee }}
-            </th>
+            <th class="white--text text-right" v-for="(annee, indexAnnee) in n11.annee" :key="indexAnnee">{{ annee }}</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <th class="text-uppercase text-no-wrap">En établissement</th>
-            <td
-              class="text-right"
-              v-for="(annee, indexAnnee) in n11.annee"
-              :key="indexAnnee"
-            >
-              {{ n11.enEtablissement[annee] }}
-            </td>
+            <td class="text-right" v-for="(annee, indexAnnee) in n11.annee" :key="indexAnnee">{{ n11.enEtablissement[annee] }}</td>
           </tr>
           <tr>
             <th class="text-uppercase text-no-wrap">Hors établissement</th>
-            <td
-              class="text-right"
-              v-for="(annee, indexAnnee) in n11.annee"
-              :key="indexAnnee"
-            >
-              {{ n11.horsEtablissement[annee] }}
-            </td>
+            <td class="text-right" v-for="(annee, indexAnnee) in n11.annee" :key="indexAnnee">{{ n11.horsEtablissement[annee] }}</td>
           </tr>
         </tbody>
         <tfoot>
           <tr class="text-uppercase primary">
             <th class="white--text">Total</th>
-            <th
-              class="white--text text-right"
-              v-for="(annee, indexAnnee) in n11.annee"
-              :key="indexAnnee"
-            >
-              {{
-                (n11.enEtablissement[annee] || 0) +
-                (n11.horsEtablissement[annee] || 0)
-              }}
+            <th class="white--text text-right" v-for="(annee, indexAnnee) in n11.annee" :key="indexAnnee">
+              {{ (n11.enEtablissement[annee] || 0) + (n11.horsEtablissement[annee] || 0) }}
             </th>
           </tr>
         </tfoot>
@@ -75,10 +51,15 @@
       :chart-data="chartData"
       :options="options"
     ></line-chart>
+
+    <v-btn color="primary" small fixed bottom right fab @click="exportXLS('n11')">
+      <v-icon>mdi-download</v-icon>
+    </v-btn>
   </div>
 </template>
 
 <script>
+import exportHelper from '@/helpers/export'
 import LineChart from '@/components/chart/LineChart'
 
 export default {
@@ -131,9 +112,7 @@ export default {
             {
               type: 'line',
               yAxisID: 'nombre',
-              data: Object.values(
-                this.$store.state.national.n11.enEtablissement
-              ),
+              data: Object.values(this.$store.state.national.n11.enEtablissement),
               label: 'En établissement',
               fill: false,
               borderColor: 'blue',
@@ -142,9 +121,7 @@ export default {
             {
               type: 'line',
               // yAxisID: 'nombre',
-              data: Object.values(
-                this.$store.state.national.n11.horsEtablissement
-              ),
+              data: Object.values(this.$store.state.national.n11.horsEtablissement),
               label: 'Hors établissement',
               fill: false,
               borderColor: 'red',
@@ -153,6 +130,11 @@ export default {
           ]
         }
       }
+    }
+  },
+  methods: {
+    exportXLS (tableName = '') {
+      exportHelper.exportXLS(tableName, this.$refs[tableName].$el.querySelector('table').outerHTML)
     }
   },
   async created () {

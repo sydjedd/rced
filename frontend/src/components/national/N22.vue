@@ -7,6 +7,7 @@
     ></v-skeleton-loader>
 
     <v-simple-table
+      ref="n22"
       class="sticky"
       v-if="!loading"
       dense
@@ -52,6 +53,10 @@
         </tbody>
       </template>
     </v-simple-table>
+
+    <v-btn color="primary" small fixed bottom right fab @click="exportXLS('n22')">
+      <v-icon>mdi-download</v-icon>
+    </v-btn>
   </div>
 </template>
 
@@ -96,6 +101,8 @@ td.border-right {
 </style>
 
 <script>
+import exportHelper from '@/helpers/export'
+
 export default {
   data () {
     return {
@@ -125,16 +132,20 @@ export default {
       }
     }
   },
+  methods: {
+    exportXLS (tableName = '') {
+      exportHelper.exportXLS(tableName, this.$refs[tableName].$el.querySelector('table').outerHTML)
+    }
+  },
   async created () {
     this.loading = true
     await this.$store.dispatch('national/n22')
     this.loading = false
   },
   mounted () {
-    const height = Math.floor(
+    this.skeletonLoader = Math.floor(
       (document.documentElement.offsetHeight - 104) / 50
     )
-    this.skeletonLoader = height > 13 ? 13 : height
   }
 }
 </script>

@@ -7,6 +7,7 @@
     ></v-skeleton-loader>
 
     <v-simple-table
+      ref="n20"
       class="sticky"
       v-if="!loading"
     >
@@ -15,11 +16,7 @@
           <tr class="text-uppercase primary">
             <th class="white--text"></th>
             <template v-for="(annee, indexAnnee) in n20.annee">
-              <th
-                class="white--text text-center"
-                v-for="(semaine, indexSemaine) in annee"
-                :key="indexAnnee + indexSemaine"
-              >
+              <th class="white--text text-center" v-for="(semaine, indexSemaine) in annee" :key="indexAnnee + indexSemaine">
                 {{ indexAnnee }} <br> {{ semaine }}
               </th>
             </template>
@@ -91,6 +88,10 @@
       :chart-data="chartData"
       :options="options"
     ></bar-chart>
+
+    <v-btn color="primary" small fixed bottom right fab @click="exportXLS('n20')">
+      <v-icon>mdi-download</v-icon>
+    </v-btn>
   </div>
 </template>
 
@@ -116,6 +117,7 @@
 </style>
 
 <script>
+import exportHelper from '@/helpers/export'
 import BarChart from '@/components/chart/BarChart'
 
 export default {
@@ -248,6 +250,11 @@ export default {
           ]
         }
       }
+    }
+  },
+  methods: {
+    exportXLS (tableName = '') {
+      exportHelper.exportXLS(tableName, this.$refs[tableName].$el.querySelector('table').outerHTML)
     }
   },
   async created () {

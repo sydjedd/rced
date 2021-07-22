@@ -7,6 +7,7 @@
     ></v-skeleton-loader>
 
     <v-simple-table
+      ref="n13"
       v-if="!loading"
     >
       <template v-slot:default>
@@ -14,45 +15,22 @@
           <tr class="text-uppercase primary">
             <th class="white--text"></th>
             <th
-              class="white--text text-right"
-              v-for="(annee, indexAnnee) in n13.annee"
-              :key="indexAnnee"
-            >
-              {{ annee }}
-            </th>
+              class="white--text text-right" v-for="(annee, indexAnnee) in n13.annee" :key="indexAnnee">{{ annee }}</th>
           </tr>
         </thead>
         <tbody>
-          <tr
-            v-for="(trimestre, indexTrimestre) in 4"
-            :key="indexTrimestre"
-          >
-            <th class="text-uppercase text-no-wrap">
-              Trimestre {{ trimestre }}
-            </th>
-            <td
-              class="text-right"
-              v-for="(annee, indexAnnee) in n13.annee"
-              :key="indexTrimestre + indexAnnee"
-            >
-              {{ n13.enEtablissement[annee][trimestre] }}
+          <tr v-for="(trimestre, indexTrimestre) in n13.trimestre" :key="indexTrimestre">
+            <th class="text-uppercase text-no-wrap">Trimestre {{ indexTrimestre }}</th>
+            <td class="text-right" v-for="(annee, indexAnnee) in n13.annee" :key="indexTrimestre + indexAnnee">
+              {{ trimestre[annee] }}
             </td>
           </tr>
         </tbody>
         <tfoot>
           <tr class="text-uppercase primary">
             <th class="white--text">Total</th>
-            <th
-              class="white--text text-right"
-              v-for="(annee, indexAnnee) in n13.annee"
-              :key="indexAnnee"
-            >
-              {{
-                (n13.enEtablissement[annee][1] || 0) +
-                (n13.enEtablissement[annee][2] || 0) +
-                (n13.enEtablissement[annee][3] || 0) +
-                (n13.enEtablissement[annee][4] || 0)
-              }}
+            <th class="white--text text-right" v-for="(annee, indexAnnee) in n13.annee" :key="indexAnnee">
+              {{ (n13.trimestre[1][annee] || 0) + (n13.trimestre[2][annee] || 0) + (n13.trimestre[3][annee] || 0) + (n13.trimestre[4][annee] || 0) }}
             </th>
           </tr>
         </tfoot>
@@ -72,10 +50,15 @@
       :chart-data="chartData"
       :options="options"
     ></bar-chart>
+
+    <v-btn color="primary" small fixed bottom right fab @click="exportXLS('n13')">
+      <v-icon>mdi-download</v-icon>
+    </v-btn>
   </div>
 </template>
 
 <script>
+import exportHelper from '@/helpers/export'
 import BarChart from '@/components/chart/BarChart'
 
 export default {
@@ -130,12 +113,7 @@ export default {
               type: 'bar',
               yAxisID: 'nombre',
               label: 'T1',
-              data: Object.keys(
-                this.$store.state.national.n13.enEtablissement
-              ).map(
-                (annee) =>
-                  this.$store.state.national.n13.enEtablissement[annee]['1']
-              ),
+              data: Object.values(this.$store.state.national.n13.annee).map(annee => { return this.$store.state.national.n13.trimestre['1'][annee] }),
               borderWidth: '3',
               borderColor: 'royalblue',
               backgroundColor: 'royalblue'
@@ -144,12 +122,7 @@ export default {
               type: 'bar',
               yAxisID: 'nombre',
               label: 'T2',
-              data: Object.keys(
-                this.$store.state.national.n13.enEtablissement
-              ).map(
-                (annee) =>
-                  this.$store.state.national.n13.enEtablissement[annee]['2']
-              ),
+              data: Object.values(this.$store.state.national.n13.annee).map(annee => { return this.$store.state.national.n13.trimestre['2'][annee] }),
               borderWidth: '3',
               borderColor: 'rebeccapurple',
               backgroundColor: 'rebeccapurple'
@@ -158,12 +131,7 @@ export default {
               type: 'bar',
               yAxisID: 'nombre',
               label: 'T3',
-              data: Object.keys(
-                this.$store.state.national.n13.enEtablissement
-              ).map(
-                (annee) =>
-                  this.$store.state.national.n13.enEtablissement[annee]['3']
-              ),
+              data: Object.values(this.$store.state.national.n13.annee).map(annee => { return this.$store.state.national.n13.trimestre['3'][annee] }),
               borderWidth: '3',
               borderColor: 'yellowgreen',
               backgroundColor: 'yellowgreen'
@@ -172,12 +140,7 @@ export default {
               type: 'bar',
               yAxisID: 'nombre',
               label: 'T4',
-              data: Object.keys(
-                this.$store.state.national.n13.enEtablissement
-              ).map(
-                (annee) =>
-                  this.$store.state.national.n13.enEtablissement[annee]['4']
-              ),
+              data: Object.values(this.$store.state.national.n13.annee).map(annee => { return this.$store.state.national.n13.trimestre['4'][annee] }),
               borderWidth: '3',
               borderColor: 'peru',
               backgroundColor: 'peru'
@@ -185,6 +148,11 @@ export default {
           ]
         }
       }
+    }
+  },
+  methods: {
+    exportXLS (tableName = '') {
+      exportHelper.exportXLS(tableName, this.$refs[tableName].$el.querySelector('table').outerHTML)
     }
   },
   async created () {
