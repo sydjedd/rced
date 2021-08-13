@@ -17,6 +17,8 @@ const options = {
 if (process.env.NODE_ENV === 'development') {
   options.withCredentials = true
   options.baseURL = '/backend/'
+} else {
+  options.baseURL = '/'
 }
 
 async function get (url, data = {}) {
