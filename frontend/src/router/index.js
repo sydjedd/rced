@@ -8,9 +8,21 @@ import Login from '@/views/Login.vue'
 import Profile from '@/views/Profile.vue'
 import National from '@/views/national/National.vue'
 import N1 from '@/views/national/N1.vue'
+import N10 from '@/views/national/N10'
+import N11 from '@/views/national/N11'
+import N12 from '@/views/national/N12'
+import N13 from '@/views/national/N13'
 import N2 from '@/views/national/N2.vue'
-import N3 from '@/views/national/N3.vue'
+import N20 from '@/views/national/N20.vue'
+import N21 from '@/views/national/N21.vue'
+import N22 from '@/views/national/N22.vue'
+import N30 from '@/views/national/N30.vue'
 import N5 from '@/views/national/N5.vue'
+import N50 from '@/views/national/N50.vue'
+import N51 from '@/views/national/N51.vue'
+import N52 from '@/views/national/N52.vue'
+import N53 from '@/views/national/N53.vue'
+
 /*
 import N4 from '@/views/national/N4.vue'
 import N6 from '@/views/national/N6.vue'
@@ -34,10 +46,39 @@ const router = new VueRouter({
     { path: '/home', name: 'Accueil', component: Home, meta: { auth: true, loggedOnly: true } },
     { path: '/profile', name: 'Profil', component: Profile, meta: { auth: true, loggedOnly: true } },
     { path: '/national', name: 'National', component: National, meta: { auth: true, loggedOnly: true } },
-    { path: '/n1', name: 'N1 - Nombre et taux de certificats électroniques par an', component: N1, meta: { auth: true, loggedOnly: true } },
-    { path: '/n2', name: 'N2 - Nombre et taux de certificats électroniques depuis 2020', component: N2, meta: { auth: true, loggedOnly: true } },
-    { path: '/n3', name: 'N3 - Evolution du nombre de décès déclarés par voie électronique par région, par département et par an', component: N3, meta: { auth: true, loggedOnly: true } },
-    { path: '/n5', name: 'N5 - Taux de certification électronique par région avant 2020', component: N5, meta: { auth: true, loggedOnly: true } },
+    {
+      path: '/national/n1',
+      component: N1,
+      children: [
+        { path: '', redirect: '/national/n10' },
+        { path: '/national/n10', name: 'N1-0 Nombre et taux de certificats électroniques par an', component: N10, meta: { auth: true, loggedOnly: true } },
+        { path: '/national/n11', name: 'N1-1 Nombre de certificats électroniques par an, en ou hors établissement', component: N11, meta: { auth: true, loggedOnly: true } },
+        { path: '/national/n12', name: 'N1-2 Nombre de certificats électroniques par trimestre et par région en établissement', component: N12, meta: { auth: true, loggedOnly: true } },
+        { path: '/national/n13', name: 'N1-3 Nombre de certificats électroniques par trimestre en établissement', component: N13, meta: { auth: true, loggedOnly: true } }
+      ]
+    },
+    {
+      path: '/national/n2',
+      component: N2,
+      children: [
+        { path: '', redirect: '/national/n20' },
+        { path: '/national/n20', name: 'N2-0 Nombre et taux de certificats électroniques depuis 2020', component: N20, meta: { auth: true, loggedOnly: true } },
+        { path: '/national/n21', name: 'N2-1 Nombre et taux de certificats électroniques par région depuis 2020', component: N21, meta: { auth: true, loggedOnly: true } },
+        { path: '/national/n22', name: 'N2-2 Nombre et taux de certificats électroniques par département depuis 2020', component: N22, meta: { auth: true, loggedOnly: true } }
+      ]
+    },
+    { path: '/national/n30', name: 'N3 - Evolution du nombre de décès déclarés par voie électronique par région, par département et par an', component: N30, meta: { auth: true, loggedOnly: true } },
+    {
+      path: '/national/n5',
+      component: N5,
+      children: [
+        { path: '', redirect: '/national/n50' },
+        { path: '/national/n50', name: 'N5-0 Taux de certificats électroniques par région avant 2020', component: N50, meta: { auth: true, loggedOnly: true } },
+        { path: '/national/n51', name: 'N5-1 Taux de certificats électroniques par département avant 2020', component: N51, meta: { auth: true, loggedOnly: true } },
+        { path: '/national/n52', name: 'N5-2 Répartition par type de lieux de décès : tous certificats avant 2020', component: N52, meta: { auth: true, loggedOnly: true } },
+        { path: '/national/n53', name: 'N5-3 Répartition par type de lieux de décès : certificats électroniques avant 2020', component: N53, meta: { auth: true, loggedOnly: true } }
+      ]
+    },
     /*
     { path: '/n4', name: 'n4', component: N4, meta: { auth: true, loggedOnly: true } },
     { path: '/n6', name: 'n6', component: N6, meta: { auth: true, loggedOnly: true } },

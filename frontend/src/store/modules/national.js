@@ -401,7 +401,7 @@ export default {
       }
     },
     async n12 ({ commit, state }) {
-      if (!state.n12.region.length) {
+      if (!state.n12.annee.length) {
         const data = await http.get('national/n12/')
         if (!data) {
           return false
@@ -419,7 +419,7 @@ export default {
       }
     },
     async n20 ({ commit, state }) {
-      if (!state.n20.annee.length) {
+      if (!Object.keys(state.n20.annee).length) {
         const data = await http.get('national/n20/')
         if (!data) {
           return false
@@ -428,7 +428,7 @@ export default {
       }
     },
     async n21 ({ commit, state }) {
-      if (!state.n21.annee.length) {
+      if (!Object.keys(state.n21.annee).length) {
         const data = await http.get('national/n21/')
         if (!data) {
           return false
@@ -437,7 +437,7 @@ export default {
       }
     },
     async n22 ({ commit, state }) {
-      if (!state.n22.annee.length) {
+      if (!Object.keys(state.n22.annee).length) {
         const data = await http.get('national/n22/')
         if (!data) {
           return false

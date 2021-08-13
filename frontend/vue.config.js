@@ -8,8 +8,9 @@ module.exports = {
   productionSourceMap: false,
   devServer: {
     proxy: {
-      '^/(auth|admin|referentiel|national|regional|etablissement)/.*$': {
-        target: process.env.BACKEND_URL,
+      '^/backend/.*$': {
+        target: process.env.VUE_APP_BACKEND_URL,
+        pathRewrite: { '^/backend': '' },
         changeOrigin: true
       }
     }

@@ -1,0 +1,100 @@
+18/06/2021
+
+RCED : Référentiel Insee 2020-2021
+
+
+1) source de données :
+
+- site : https://www.data.gouv.fr/fr/datasets/fichier-des-personnes-decedees/
+- récupération de : deces-2020.txt, deces-2021-t1.txt, deces-2021-m04.txt et deces-2021-m04.txt 
+- les concaténer (sous PSPad) --> deces-2020-2021m5.txt
+- ne conserver que date de décès (format AMJ) et code de département (format texte) SUR 3 CAR. (pour avoir les DROM)
+- vérifier qu'on a bien 11 caractères sur chaque ligne.
+- faire un tri SANS DEDOUBLONNER et retirer les années différentes de 2020 et 2021
+
+
+2) traitements sous Excel
+
+- lancer Excel et ouvrir le fichier txt
+
+- importer le fichier concaténé : en mode largeur fixe ; ne pas oublier de mettre des zéros à gauche (format texte, pour le code de dép)
+
+- sauvegarder sous Décès-2020-2021m5.txt
+
+- créer une première ligne, avc le nom des champs : 
+JourDeces	Dep_Dc
+ 
+- filtrer ; trier par date ; isoler les décès hors 2020 et 2021 et supprimer les lignes.
+- corriger les dates erronées (2020010 devient 01/01/2020, au format date)
+
+- trier par département ; supprimer les décès avec code de commune en 975, 977, 978, 98n et 99n
+- pour les dépt de métropole (01 à 95 et 2A et 2B), suppression du car. à droite.
+
+--> Décès-2020-2021m5.txt
+
+
+
+3) intégration dans la table en base :
+
+- vidange de la table :
+
+use Autres
+go
+
+truncate table [dbo].[Referentiel_Insee_2020]
+GO
+
+
+- tâche "Importer des données", en respectant le format des données :
+	[JourDeces] [date] NULL,   --> DT_DATE
+	[Dep_Dc] [varchar](3) NULL,    --> DT_STR (3)
+	[Nbre_Dc_Insee] [smallint] NULL,
+	[Semaine_Insee ] [tinyint] NULL
+
+- ajout d'un zéro à gauche :
+
+USE [Autres]
+go
+
+update [dbo].[Referentiel_Insee_2020]
+set [Dep_Dc] = '0' + [Dep_Dc]
+  where DATALENGTH([Dep_Dc]) = '1'
+GO
+
+(exécuter 2 fois)(la dernière exécution doit retourner 0)
+
+
+- mettre un 1 dans la colonne [Nbre_Dc_Insee] :
+
+USE [Autres]
+go
+
+update [dbo].[Referentiel_Insee_2020]
+set [Nbre_Dc_Insee] = '1'
+  where [Nbre_Dc_Insee] is NULL
+GO
+
+(exécuter 2 fois)(la dernière exécution doit retourner 0)
+
+
+
+01/01/2020
+01/02/2020
+01/03/2020
+01/04/2020
+01/05/2020
+01/06/2020
+01/07/2020
+01/08/2020
+01/09/2020
+01/10/2020
+01/11/2020
+01/12/2020
+
+01/01/2021
+01/02/2021
+
+
+
+
+

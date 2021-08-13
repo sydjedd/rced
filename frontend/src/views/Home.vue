@@ -18,9 +18,7 @@
           </p>
           <ul>
             <li>Direction générale de la Santé (Ministère de la santé)</li>
-            <li>
-              Santé Publique France (= ANSP, Agence nationale de santé publique)
-            </li>
+            <li>Santé Publique France (= ANSP, Agence nationale de santé publique)</li>
             <li>Inserm</li>
             <li>Agences régionales de santé (ARS)</li>
             <li>Etablissements de santé</li>
@@ -30,19 +28,31 @@
 
           <p>Données</p>
           <ul>
-            <li>Quelle est leur Origine?</li>
-            <li>Quelles sont leurs limitations?</li>
-            <li>Quand sont-elles mises à jour?</li>
+            <li>Quelle est leur Origine ?</li>
+            <li>Quelles sont leurs limitations ?</li>
+            <li>Quand sont-elles mises à jour ?</li>
             <li>etc.</li>
           </ul>
 
           <br />
 
-          <p>Représentations: que trouve-t-on au niveau</p>
+          <p>Représentations :</p>
           <ul>
-            <li>National?</li>
-            <li>Régional?</li>
-            <li>Etablissement?</li>
+            <li>
+                Que trouve-t-on comme données nationales ?
+                <br>
+                Les données nationales disponibles dans RCED concernent le suivi de l'activité de certification électronique globale sur le territoire, la certification électronique en et hors établissement réalisée sur ordinateur ou application mobile, l'identification des établissements raccordés à CertDc ainsi que l'évolution du nombre de médecins certifiant électroniquement en France.
+            </li>
+            <li>
+                Que trouve-t-on comme données régionales ?
+                <br>
+                Les données régionales disponibles dans RCED concernent le suivi de l'activité de certification électronique par régions en et hors établissement.
+            </li>
+            <li>
+                Que trouve-t-on comme données à l'échelle d'un établissement ?
+                <br>
+                Les données à l'échelle d'un établissement concernent le nombre et le taux de certification électronique, évoluant au cours de l'année actuelle et par rapport à l'année précédente.
+            </li>
           </ul>
 
           <br />

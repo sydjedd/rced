@@ -23,10 +23,10 @@ export default {
   data () {
     return {
       items: [
-        { title: 'N1 - Nombre et taux de certificats électroniques par an', icon: 'mdi-chart-line', link: 'n1' },
-        { title: 'N2 - Nombre et taux de certificats électroniques depuis 2020', icon: 'mdi-chart-line', link: 'n2' },
-        { title: 'N3 - Evolution du nombre de décès déclarés par voie électronique par département et par an', icon: 'mdi-chart-line', link: 'n3' },
-        { title: 'N5 - Taux de certification électronique par région avant 2020', icon: 'mdi-chart-line', link: 'n5' }
+        { title: 'N1 - Nombre et taux de certificats électroniques par an', icon: 'mdi-chart-line', link: '/national/n1' },
+        { title: 'N2 - Nombre et taux de certificats électroniques depuis 2020', icon: 'mdi-chart-line', link: '/national/n2' },
+        { title: 'N3 - Evolution du nombre de décès déclarés par voie électronique par département et par an', icon: 'mdi-chart-line', link: '/national/n30' },
+        { title: 'N5 - Taux de certification électronique par région avant 2020', icon: 'mdi-chart-line', link: '/national/n5' }
         /*
         { title: 'N4 - Evolution du nombre de décès déclarés par voie électronique par établissement et par an', icon: 'mdi-chart-line', link: 'n4' },
         { title: 'N6 - Nombre de certificats électroniques déclarés par an et par source de données', icon: 'mdi-chart-line', link: 'n6' },
