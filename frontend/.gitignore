@@ -1,6 +1,4 @@
 .DS_Store
-node_modules
-/dist
 
 # Editor directories and files
 .idea
@@ -15,6 +13,14 @@ node_modules
 .env*
 .env.local
 .env.*.local
+
+# Node files
+node_modules
+package-lock.json
+yarn.lock
+
+# Vue.js files
+/dist
 
 # Log files
 npm-debug.log*

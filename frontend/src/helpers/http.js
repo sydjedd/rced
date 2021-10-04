@@ -11,28 +11,27 @@ const options = {
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json'
-  }
+  },
+  baseURL: '/api/'
 }
 
 if (process.env.NODE_ENV === 'development') {
   options.withCredentials = true
-  options.baseURL = '/backend/'
-} else {
-  options.baseURL = '/'
 }
 
-async function get (url, data = {}) {
-  return xhr('get', url, data)
+async function get (url, params = {}) {
+  return xhr('get', url, {}, params)
 }
 
 async function post (url, data = {}) {
-  return xhr('post', url, data)
+  return xhr('post', url, data, {})
 }
 
-async function xhr (method = 'get', url, data = {}) {
+async function xhr (method = 'get', url, data = {}, params = {}) {
   options.method = method
   options.url = url
   options.data = data
+  options.params = params
   try {
     const response = await axios(options)
 
@@ -117,7 +116,6 @@ async function jsonHttpRequest(uri, requestOptions) {
 }
 */
 export default {
-  // jsonHttpRequest,
   get,
   post
 }

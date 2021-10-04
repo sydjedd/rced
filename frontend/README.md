@@ -13,10 +13,9 @@ Rapports sur la certification électronique des décès
 ### Créer le fichier dotenv
 
 ```dotenv
-NODE_ENV=development
 VUE_APP_NAME=RCED
 VUE_APP_DESCRIPTION=Rapports sur la certification électronique des décès
-BACKEND_URL=http://localhost:8000
+VUE_APP_API_URL=http://localhost:8000
 ```
 
 ### Installer les dépendances

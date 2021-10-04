@@ -18,11 +18,12 @@ ENV=development
 ALLOWED_HOSTS=localhost,127.0.0.1
 SECRET_KEY=r!t66or+g%y33@g8o9f2c1efpbu1#r+v796u97s8gyjql4#fgx
 FRONTEND_URL=http://localhost:8080
+
 DATABASE_HOST=localhost
 DATABASE_PORT=5432
-DATABASE_NAME=rcedUtilisateur
-DATABASE_USER=rcedBaseDeDonnees
-DATABASE_PASSWORD=motDePasse
+DATABASE_NAME=rcedBaseDeDonnees
+DATABASE_USER=rcedUtilisateur
+DATABASE_PASSWORD=rcedMotDePasse
 ```
 
 ### Installer l'environnement virtuel
