@@ -194,16 +194,16 @@ export default {
       alert: false,
       alertType: 'info',
       alertMessage: '',
-      name: 'Salim YDJEDD',
+      name: '',
       nameRules: [
         v => !!v || 'Le nom est obligatoire.'
       ],
-      phone: '0123456789',
+      phone: '',
       phoneRules: [
         v => !!v || 'Le numéro de éléphone est obligatoire.',
         v => (!!v && /^[0-9]+$/.test(v)) || 'Votre numéro de éléphone est invalide.'
       ],
-      email: 'sydjedd@gmail.com',
+      email: '',
       emailRules: [
         v => !!v || 'Le courriel est obligatoire.',
         v => (!!v && /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v)) || 'Votre courriel de récupération est invalide.'
@@ -212,7 +212,7 @@ export default {
       toRules: [
         v => !!v || 'Le sujet est obligatoire.'
       ],
-      message: 'kh sfkg jhsflkgjflkgjsl  sdlkjlfsjgl sfjb ',
+      message: '',
       messageRules: [
         v => !!v || 'Le texte est obligatoire.'
       ]
