@@ -97,7 +97,7 @@ router.beforeEach((to, from, next) => {
   const isLogged = store.state.user.is_logged
 
   if (to.meta.auth === true && !isLogged) {
-    return next('/login')
+    return next('/')
   }
 
   if (isLogged && to.meta.loggedOnly === false) {

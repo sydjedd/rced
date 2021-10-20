@@ -1,5 +1,10 @@
 <template>
   <v-app>
+    <v-app-bar v-if="this.$route.meta.loggedOnly" color="primary" dense dark app>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>{{ this.$route.name }}</v-toolbar-title>
+    </v-app-bar>
+
     <v-navigation-drawer v-if="this.$route.meta.loggedOnly" v-model="drawer" app>
       <v-list dense nav>
         <v-list-item>
@@ -78,12 +83,17 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-    </v-navigation-drawer>
 
-    <v-app-bar v-if="this.$route.meta.loggedOnly" color="primary" dense dark app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>{{ this.$route.name }}</v-toolbar-title>
-    </v-app-bar>
+      <v-alert class="ma-3 text-caption text-justify" dense outlined text color="blue">
+        Les données de 2018 et suivantes ne sont pas finalisées (il peut y avoir à la marge quelques certificats «doublons» ou des décès «manquants», qui sont traités au moment de la finalisation de l'année).
+        <br>
+        L'année considérée est l'année de décès (et non l’année de déclaration du décès).
+        <br>
+        Sauf indication contraire, le lieu considéré lors de l’affectation d’un décès à un département ou une région est celui de sa survenue et non celui de sa déclaration ou du domicile du défunt.
+        <br>
+        edc déclarés en établissement et hors établissement : on fait référence ici à la pratique du médecin certifiant. Un médecin libéral pouvant certifier au sein d’un établissement, un certificat de ce type sera cependant comptabilisé ici comme «hors établissement».
+      </v-alert>
+    </v-navigation-drawer>
 
     <v-main class="grey lighten-3">
       <v-container fluid :fill-height="!this.$route.meta.loggedOnly">

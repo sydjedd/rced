@@ -3,19 +3,22 @@
     <v-card-title class="pt-0">
       <v-tabs v-model="tab" fixed-tabs>
         <v-tab>FAQ</v-tab>
-        <v-tab>CONTACT</v-tab>
-        <v-tab>RGPD</v-tab>
+        <v-tab>Contact</v-tab>
+        <v-tab>Mentions légales</v-tab>
       </v-tabs>
     </v-card-title>
 
     <v-card-text>
       <v-tabs-items v-model="tab">
-        <v-tab-item>
-          <p>
+        <v-tab-item class="text-body-1">
+          <div class="text-h6 mb-3">
             Accès
-            <br />
+          </div>
+
+          <p>
             La plateforme est accessible uniquement aux utilisateurs de :
           </p>
+
           <ul>
             <li>Direction générale de la Santé (Ministère de la santé)</li>
             <li>Santé Publique France (= ANSP, Agence nationale de santé publique)</li>
@@ -24,9 +27,10 @@
             <li>Etablissements de santé</li>
           </ul>
 
-          <br />
+          <div class="text-h6 mt-6 mb-3">
+            Données
+          </div>
 
-          <p>Données</p>
           <ul>
             <li>Quelle est leur Origine ?</li>
             <li>Quelles sont leurs limitations ?</li>
@@ -34,9 +38,10 @@
             <li>etc.</li>
           </ul>
 
-          <br />
+          <div class="text-h6 mt-6 mb-3">
+            Représentations :
+          </div>
 
-          <p>Représentations :</p>
           <ul>
             <li>
                 Que trouve-t-on comme données nationales ?
@@ -55,18 +60,20 @@
             </li>
           </ul>
 
-          <br />
+          <div class="text-h6 mt-6 mb-3">
+            Habilitations
+          </div>
 
-          <p>Habilitations</p>
           <ul>
             <li>Quelles en sont les règles?</li>
             <li>Comment sont-elles gérées?</li>
             <li>etc.</li>
           </ul>
 
-          <br />
+          <div class="text-h6 mt-6 mb-3">
+            Développement du site
+          </div>
 
-          <p>Développement du site</p>
           <ul>
             <li>Qui l’a conçu ?</li>
             <li>Qui l’a développé ?</li>
@@ -74,55 +81,99 @@
             <li>Qui le maintient ?</li>
           </ul>
 
-          <br />
-
           <p>etc.</p>
         </v-tab-item>
 
-        <v-tab-item>
-          <span class="text-h5">Déposez votre message</span>
+        <v-tab-item class="text-body-1">
+          <v-form v-model="valid" ref="form" @submit.prevent="sendEmail">
+            <div class="text-h6 mb-7">Déposez votre message</div>
 
-          <p>
-            <v-text-field type="text" label="Nom"></v-text-field>
-            <v-text-field type="text" label="Numéro de éléphone"></v-text-field>
-            <v-text-field type="text" label="Courriel"></v-text-field>
-          </p>
+            <v-text-field v-model="name"  :rules="nameRules" type="text" label="Nom"></v-text-field>
+            <v-text-field v-model="phone" :rules="phoneRules" type="text" label="Numéro de éléphone"></v-text-field>
+            <v-text-field v-model="email" :rules="emailRules" type="text" label="Courriel"></v-text-field>
 
-          <p>
-            <span class="text-body-1">Votre question porte sur</span>
-            <v-radio-group>
-              <v-radio label="les données [envoyer au CépiDC]"></v-radio>
-              <v-radio
-                label="le fonctionnement du site [envoyer à la TMA]"
-              ></v-radio>
-              <v-radio
-                label="l’accès au site (compte, navigateur, etc.) [envoyer au CdS]"
-              ></v-radio>
+            <v-radio-group v-model="to" :rules="toRules" label="Votre question porte sur" class="mb-7">
+              <v-radio value="cepidc" label="les données [envoyer au CépiDC]"></v-radio>
+              <v-radio value="tma" label="le fonctionnement du site [envoyer à la TMA]"></v-radio>
+              <v-radio value="cds" label="l’accès au site (compte, navigateur, etc.) [envoyer au CdS]"></v-radio>
             </v-radio-group>
-          </p>
 
-          <v-textarea label="Votre texte"></v-textarea>
+            <v-textarea v-model="message" :rules="messageRules" label="Votre texte" class="mb-7"></v-textarea>
 
-          <div class="text-center d-block">
-            <v-btn color="primary"> Envoyer </v-btn>
-          </div>
+            <v-alert :value="alert" dense text outlined :type="alertType" class="mb-7">
+              {{ alertMessage }}
+            </v-alert>
+
+            <v-btn
+              :loading='loading'
+              :disabled="!valid"
+              type="sybmit"
+              color="primary"
+            >
+              Envoyer
+            </v-btn>
+          </v-form>
         </v-tab-item>
 
-        <v-tab-item>
-          <span class="text-justify">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem
-            doloremque incidunt eum voluptates nostrum perspiciatis inventore
-            beatae reiciendis placeat, ex, voluptatum ea odit? Adipisci possimus
-            non et consequatur necessitatibus, fugiat pariatur ipsam dignissimos
-            sequi quae, corrupti vero tempora quidem, officiis expedita optio
-            ut! Fugiat vitae aut quaerat recusandae quo nihil iste maiores
-            doloremque atque, omnis praesentium optio error ea! Facere, quos ad.
-            Aliquam, animi adipisci, provident delectus commodi fugit sed,
-            accusantium natus maxime voluptatem at iure dignissimos voluptatum
-            obcaecati consectetur sunt numquam repellendus suscipit quia! Fugiat
-            modi velit odio numquam amet maiores minima magni vitae ex hic!
-            Beatae, magni consequuntur?
-          </span>
+        <v-tab-item class="text-body-1">
+          <div class="text-h6 mb-3">
+            Hébergement
+          </div>
+
+          <p>
+            RCED est hébergé par le DSI de l’Inserm, sur le site du <a href="https://www.cines.fr/" target="blank">Cines</a> (Centre Informatique National de l'Enseignement Supérieur) à Montpellier.
+          </p>
+
+          <div class="text-h6 mt-6 mb-3">
+            Conception et réalisation
+          </div>
+
+          <p>
+            RCED a été conçu et réalisé par le DSI de l’Inserm, qui en assure également l’exploitation et la maintenance :
+          </p>
+
+          <ul>
+            <li>Chef de projet opérationnel : Dominique Pigeon</li>
+            <li>Chefs de projet techniques : Bruno Urbero, Sylvain Gérard, Salim Ydjedd</li>
+          </ul>
+
+          <p class="mt-3">
+            Ont participé aux spécifications : la DGS (Direction générale de la Santé, Ministère des Solidarités et de la Santé), Santé Publique France (ANSP, Agence nationale de santé publique) et le CépiDc-Inserm (Centre d'épidémiologie sur les causes médicales de Décès).
+          </p>
+
+          <div class="text-h6 mt-6 mb-3">
+            Origine des données
+          </div>
+
+          <p>
+            Pour l’essentiel, les données proviennent des bases de données du CépiDc-Inserm, qui a pour mission de recueillir et mettre en qualité le contenu de la partie médicale des certificats de décès.
+          </p>
+
+          <p>
+          Des données complémentaires proviennent de :
+          </p>
+
+          <ul>
+            <li>l’Insee : fichier des personnes décédées</li>
+            <li>la <a href="https://drees.solidarites-sante.gouv.fr/" target="blank">Drees</a> (Direction de la recherche, des études, de l'évaluation et des statistiques, Ministère des Solidarités et de la Santé) : référentiel des établissements de santé (Finess)</li>
+            <li>l’ATIH (Agence technique de l'information sur l'hospitalisation, Ministère des Solidarités et de la Santé) : nombre de décès en établissement de santé (issu du Pmsi)</li>
+          </ul>
+
+          <div class="text-h6 mt-6 mb-3">
+            Contenu du site
+          </div>
+
+          <p>
+            L'Inserm s'efforce d'assurer au mieux de ses possibilités l'exactitude et la mise à jour des informations diffusées, au moment de leur mise en ligne sur le site. Cependant, les données sont non finalisées, provisoires et susceptibles d’évoluer au cours du temps, et l'Inserm ne peut garantir l'exactitude, la précision ou l'exhaustivité des informations mises à disposition sur le site. Les informations présentes sur le site sont non-contractuelles.
+          </p>
+
+          <div class="text-h6 mt-6 mb-3">
+            Données personnelles
+          </div>
+
+          <p>
+            Les données de connexion sont protégées selon les normes en vigueur.
+          </p>
         </v-tab-item>
       </v-tabs-items>
     </v-card-text>
@@ -130,11 +181,82 @@
 </template>
 
 <script>
+import http from '@/helpers/http.js'
+
 export default {
   name: 'Home',
   data () {
     return {
-      tab: null
+      tab: null,
+      loading: false,
+      radio: '',
+      valid: false,
+      alert: false,
+      alertType: 'info',
+      alertMessage: '',
+      name: 'Salim YDJEDD',
+      nameRules: [
+        v => !!v || 'Le nom est obligatoire.'
+      ],
+      phone: '0123456789',
+      phoneRules: [
+        v => !!v || 'Le numéro de éléphone est obligatoire.',
+        v => (!!v && /^[0-9]+$/.test(v)) || 'Votre numéro de éléphone est invalide.'
+      ],
+      email: 'sydjedd@gmail.com',
+      emailRules: [
+        v => !!v || 'Le courriel est obligatoire.',
+        v => (!!v && /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v)) || 'Votre courriel de récupération est invalide.'
+      ],
+      to: '',
+      toRules: [
+        v => !!v || 'Le sujet est obligatoire.'
+      ],
+      message: 'kh sfkg jhsflkgjflkgjsl  sdlkjlfsjgl sfjb ',
+      messageRules: [
+        v => !!v || 'Le texte est obligatoire.'
+      ]
+    }
+  },
+  methods: {
+    async sendEmail () {
+      if (!this.$refs.form.validate()) {
+        return false
+      }
+      this.alert = false
+      this.alertMessage = ''
+      const data = new FormData()
+      data.append('name', this.name)
+      data.append('phone', this.phone)
+      data.append('email', this.email)
+      data.append('to', this.to)
+      data.append('message', this.message)
+      this.loading = true
+      const retour = await http.post('email/send/', data)
+      this.loading = false
+      if (!retour) {
+        this.alertType = 'error'
+        this.alertMessage = 'Erreur de connexion'
+        this.alert = true
+      }
+      if (retour.status === 'error') {
+        this.alertType = 'error'
+        this.alertMessage = retour.message
+        this.alert = true
+      }
+      if (retour.status === 'fail') {
+        this.alertType = 'error'
+        this.alertMessage = Object.values(retour.data).join(' ')
+        this.alert = true
+      }
+      if (retour.status === 'success') {
+        this.alertType = 'success'
+        this.alertMessage = retour.message
+        this.alert = true
+        this.show = false
+        this.emailRecoveryAlert = false
+        this.emailRecoveryField = false
+      }
     }
   }
 }

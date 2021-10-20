@@ -11,11 +11,11 @@
     </v-card>
 
     <v-alert class="mt-4" dense dismissible border="left" type="warning">
-      Le nombre de certificats électroniques est issu de CertDC.
+      En rouge, des chiffres non pris en compte dans le graphique car probablement incomplets.
       <br>
-      Le nombre de certificats papier est déduit du nombre total de décès mis à disposition par <a href="https://www.data.gouv.fr/fr/datasets/fichier-des-personnes-decedees" target="_blank" class="text-decoration-none">l'INSEE</a>.
+      Le nombre de certificats papier est déduit du nombre total de décès enregistré par l'Insee et non des données du CépiDc.
       <br>
-      L'année considérée est celle du décès (et non celle d'établissement du certificat par le médecin).
+      Il n’est pas fait de distinction entre les types d'exercice (libéral ou en établissement).
     </v-alert>
 
     <router-view></router-view>

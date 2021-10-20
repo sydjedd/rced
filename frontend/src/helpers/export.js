@@ -1,9 +1,10 @@
-async function exportXLS (talbeName = '', tableContent = '') {
+async function exportXLS (tableName = '', tableContent = '') {
   const date = new Date()
+  tableName = (tableName.slice(0, 2) + '-' + tableName.slice(2)).toUpperCase()
   const timestamp = date.getFullYear() + '' + ('0' + (date.getMonth() + 1)).slice(-2) + '' + ('0' + date.getDate()).slice(-2) + '' + ('0' + date.getHours()).slice(-2) + '' + ('0' + date.getMinutes()).slice(-2) + '' + ('0' + date.getSeconds()).slice(-2)
-  const nomfichier = talbeName.toUpperCase() + '_' + timestamp + '.xls'
+  const nomfichier = tableName + '_' + timestamp + '.xls'
   const table =
-    '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>' + talbeName + '</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/></head><body>' +
+    '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>' + tableName + '</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/></head><body>' +
     tableContent
       .replace(/[\r\n]/g, '') // suppression des \r (fin de ligne) et \n (nouvelle ligne)
       .replace(/> +/g, '>') // suppression des blancs apres une balise html

@@ -166,3 +166,17 @@ else:
     SECURE_HSTS_PRELOAD = True
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_SECONDS = 0 # 31536000 # 1 year
+
+# SMTP
+EMAIL_CEPIDC = os.getenv('EMAIL_CEPIDC', '')
+EMAIL_TMA = os.getenv('EMAIL_TMA', '')
+EMAIL_CDS = os.getenv('EMAIL_CDS', '')
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.getenv('EMAIL_HOST', '')
+EMAIL_PORT = os.getenv('EMAIL_PORT', '')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
+EMAIL_USE_TLS = True
+EMAIL_USE_SSl = False
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

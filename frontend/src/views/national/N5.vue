@@ -11,9 +11,9 @@
     </v-card>
 
     <v-alert class="mt-4" dense dismissible border="left" type="warning">
-      Attention, le nombre de certificats n'est pas totalement finalisé pour les deux années antérieures à l'année en cours.
+      Le taux de certification électronique n'est calculable qu'à la fin de la réception de tous les certificats papier et de la finalisation des données.
       <br>
-      L'année considérée est celle du décès (et non celle d'établissement du certificat par le médecin).
+      L’exactitude des données au-delà de 2018 n’est donc pas garantie.
     </v-alert>
 
     <router-view></router-view>

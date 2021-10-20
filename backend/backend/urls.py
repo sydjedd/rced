@@ -16,6 +16,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import include, path, re_path
+from . import views
 
 """
 from django.views.decorators.csrf import ensure_csrf_cookie
@@ -36,7 +37,8 @@ urlpatterns = [
     path('admin/', admin.site.urls, name = 'admin'),
     path('auth/', include('authentication.urls'), name = 'auth'),
     path('referentiel/', include('referentiel.urls'), name = 'referentiel'),
-    path('national/', include('national.urls'), name = 'national')
+    path('national/', include('national.urls'), name = 'national'),
+    path('email/send/', views.sendEmal, name = 'send email')
     #path('accounts/', include('django.contrib.auth.urls')),
     #path('', index, name='index'),
     #re_path(r'^.*$', index, name='index'),

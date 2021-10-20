@@ -1,5 +1,9 @@
 <template>
   <div>
+     <v-alert class="mt-4" dense dismissible border="left" type="warning">
+      En rouge, données provisoires (retard dans la réception des certificats papier)
+    </v-alert>
+
     <v-card class="mt-4" :loading="loading">
       <v-card-text>
         <v-skeleton-loader
