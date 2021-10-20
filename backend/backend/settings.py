@@ -27,7 +27,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Frontend
 FRONTEND_DIR = os.path.join(BASE_DIR, '..', 'frontend', 'dist')
-FRONTEND_URL = os.getenv('FRONTEND_URL', '')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/

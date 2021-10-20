@@ -59,7 +59,7 @@
       <v-divider v-if="this.$store.state.user.is_staff"></v-divider>
 
       <v-list v-if="this.$store.state.user.is_staff" dense nav>
-        <v-list-item href="/admin/">
+        <v-list-item href="/api/admin/">
           <v-list-item-icon>
             <v-icon>mdi-tune</v-icon>
           </v-list-item-icon>

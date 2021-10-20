@@ -343,19 +343,22 @@ Avec ces lignes
 
 ```nginx
 server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
+    listen       80 default_server;
+    listen       [::]:80 default_server;
+    server_name  dc2vms133.inserm.fr;
 
     location = /favicon.ico {
         access_log off;
         log_not_found off;
+        root /rce/rec1/appli/n1/frontend/dist;
     }
 
     location /static/ {
         root /rce/rec1/appli/n1/backend/;
     }
 
-    location ~ ^/(auth|admin|national|regional|etablissement)/.*$ {
+    location ~ ^/api/.*$ {
+        rewrite ^/api/(.*)$ /$1  break;
         proxy_set_header Host $http_host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -363,12 +366,9 @@ server {
         proxy_pass http://unix:/run/gunicorn.sock;
     }
 
-    location /index.html {
-        root /rce/rec1/appli/n1/frontend/dist/;
-    }
-
     location / {
-        rewrite ^/(.*) index.html permanent;
+        root /rce/rec1/appli/n1/frontend/dist;
+        try_files $uri $uri/  /index.html;
     }
 }
 ```

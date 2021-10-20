@@ -18,21 +18,6 @@ from django.contrib import admin
 from django.urls import include, path, re_path
 from . import views
 
-"""
-from django.views.decorators.csrf import ensure_csrf_cookie
-from django.conf import settings
-
-if settings.ENV == 'development':
-    from django.http import HttpResponseRedirect
-    def index(request):
-        return HttpResponseRedirect(settings.FRONTEND_URL)
-else:
-    from django.shortcuts import render
-    @ensure_csrf_cookie
-    def index(request):
-        return render(request, 'index.html', context=None)
-"""
-
 urlpatterns = [
     path('admin/', admin.site.urls, name = 'admin'),
     path('auth/', include('authentication.urls'), name = 'auth'),

@@ -17,13 +17,21 @@ Rapports sur la certification électronique des décès
 ENV=development
 ALLOWED_HOSTS=localhost,127.0.0.1
 SECRET_KEY=r!t66or+g%y33@g8o9f2c1efpbu1#r+v796u97s8gyjql4#fgx
-FRONTEND_URL=http://localhost:8080
 
 DATABASE_HOST=localhost
 DATABASE_PORT=5432
 DATABASE_NAME=rcedBaseDeDonnees
 DATABASE_USER=rcedUtilisateur
 DATABASE_PASSWORD=rcedMotDePasse
+
+EMAIL_CEPIDC=cepidc@inserm.fr
+EMAIL_TMA=tma@inserm.fr
+EMAIL_CDS=cds@inserm.fr
+
+EMAIL_HOST=smtp.inserm.fr
+EMAIL_PORT=587
+EMAIL_HOST_USER=rced.dsi@inserm.fr
+EMAIL_HOST_PASSWORD=rcedMotDePasse
 ```
 
 ### Installer l'environnement virtuel
