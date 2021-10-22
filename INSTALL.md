@@ -357,7 +357,7 @@ server {
         root /rce/rec1/appli/n1/backend/;
     }
 
-    location ~ ^/api/.*$ {
+    location ~ ^/(api|admin)/.*$ {
         rewrite ^/api/(.*)$ /$1  break;
         proxy_set_header Host $http_host;
         proxy_set_header X-Real-IP $remote_addr;
