@@ -10,81 +10,160 @@
 
     <v-card-text>
       <v-tabs-items v-model="tab">
-        <v-tab-item class="text-body-1">
-          <div class="text-h6 mb-3">
+        <v-tab-item class="text-body-2">
+          <div class="text-h6">
             Accès
           </div>
 
-          <p>
-            La plateforme est accessible uniquement aux utilisateurs de :
-          </p>
+            <div class="text-subtitle-1 mt-3">
+              Qui peut accéder au site ?
+            </div>
+            <div class="ml-7">
+              Les utilisateurs du site appartiennent à :
+              <ul>
+                <li>Pour le niveau national :
+                  <ul>
+                    <li>La Direction générale de la Santé (DGS, Ministère des Solidarités et de la Santé)</li>
+                    <li>La DINUM (Direction interministérielle du numérique)</li>
+                    <li>L’ANSP (Agence nationale de santé publique = Santé Publique France)</li>
+                    <li>L’Inserm (Institut National de la Santé et de la Recherche Médicale)</li>
+                  </ul>
+                </li>
+                <li>Pour le niveau régional :
+                  <ul>
+                    <li>Les Agences régionales de santé (ARS)</li>
+                  </ul>
+                </li>
+                <li>Pour le niveau établissement :
+                  <ul>
+                    <li>Les établissements de santé utilisant la certification électronique des décès</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
 
-          <ul>
-            <li>Direction générale de la Santé (Ministère de la santé)</li>
-            <li>Santé Publique France (= ANSP, Agence nationale de santé publique)</li>
-            <li>Inserm</li>
-            <li>Agences régionales de santé (ARS)</li>
-            <li>Etablissements de santé</li>
-          </ul>
-
-          <div class="text-h6 mt-6 mb-3">
+          <div class="text-h6 mt-6">
             Données
           </div>
 
-          <ul>
-            <li>Quelle est leur Origine ?</li>
-            <li>Quelles sont leurs limitations ?</li>
-            <li>Quand sont-elles mises à jour ?</li>
-            <li>etc.</li>
-          </ul>
+            <div class="text-subtitle-1 mt-3">
+              Quelle est leur Origine ?
+            </div>
+            <div class="ml-7">
+              <p>
+                Pour l’essentiel, les données proviennent des bases de données du CépiDc-Inserm (Centre d’épidémiologie sur les causes médicales de décès), qui a pour mission de recueillir et mettre en qualité le contenu de la partie médicale des certificats de décès.
+              </p>
 
-          <div class="text-h6 mt-6 mb-3">
-            Représentations :
+              <div>
+                Des données complémentaires proviennent de :
+              </div>
+              <ul>
+                <li>l’Insee : fichier des personnes décédées</li>
+                <li>la Drees (Direction de la recherche, des études, de l'évaluation et des statistiques, Ministère des Solidarités et de la Santé) : référentiel des établissements de santé (Finess)</li>
+                <li>l’ATIH (Agence technique de l'information sur l'hospitalisation, Ministère des Solidarités et de la Santé) : nombre de décès en établissement de santé (issu du Pmsi)"</li>
+              </ul>
+            </div>
+
+            <div class="text-subtitle-1 mt-3">
+              Quelles sont leurs limitations ?
+            </div>
+            <div class="ml-7">
+              <ul class="mb-3">
+                <li>Certificats électroniques : les données arrivent en quasi temps réel au CépiDCc.</li>
+                <li>Certificats papier : mettent de 3 à 6 mois à parvenir au CépiDCc.</li>
+                <li>Total des décès (provenance Insee) : retard d’environ 4 semaines.</li>
+                <li>Nombre de décès par établissement de santé (ATIH) : retard d’environ 3 mois</li>
+              </ul>
+            </div>
+
+            <div class="text-subtitle-1 mt-3">
+              Quelle est leur fréquence de leur mise à jour ?
+            </div>
+            <div class="ml-7">
+              Les données provenant de l’Inserm, de l’Insee et de la Drees sont mises à jour une fois par semaine; celles provenant de l’ATIH, une fois par mois.
+            </div>
+
+          <div class="text-h6 mt-6">
+            Représentations
           </div>
 
-          <ul>
-            <li>
-                Que trouve-t-on comme données nationales ?
-                <br>
-                Les données nationales disponibles dans RCED concernent le suivi de l'activité de certification électronique globale sur le territoire, la certification électronique en et hors établissement réalisée sur ordinateur ou application mobile, l'identification des établissements raccordés à CertDc ainsi que l'évolution du nombre de médecins certifiant électroniquement en France.
-            </li>
-            <li>
-                Que trouve-t-on comme données régionales ?
-                <br>
-                Les données régionales disponibles dans RCED concernent le suivi de l'activité de certification électronique par régions en et hors établissement.
-            </li>
-            <li>
-                Que trouve-t-on comme données à l'échelle d'un établissement ?
-                <br>
-                Les données à l'échelle d'un établissement concernent le nombre et le taux de certification électronique, évoluant au cours de l'année actuelle et par rapport à l'année précédente.
-            </li>
-          </ul>
+            <div class="text-subtitle-1 mt-3">
+              Quelles formes prennent les statistiques ?
+            </div>
+            <div class="ml-7">
+              <ul>
+                <li>Elles sont présentées sous forme de tableaux, le plus souvent avec une répartition temporelle (année, trimestre, mois et/ou semaine) en colonne et une répartition géographique (région département et/ou ville) ou par type de lieu de décès en ligne. Dans de nombreux cas, il est possible de faire varier les critères d’affichage.</li>
+                <li>Des représentations graphiques sont proposées,</li>
+                <li>de même que la possibilité de télécharger les données ayant servi à générer un tableau ou un graphique (cf. ci-dessous).</li>
+              </ul>
+            </div>
 
-          <div class="text-h6 mt-6 mb-3">
-            Habilitations
+            <div class="text-subtitle-1 mt-3">
+              Que trouve-t-on comme données nationales ?
+            </div>
+            <div class="ml-7">
+              Les données nationales disponibles dans RCED concernent le suivi de l'activité de certification électronique globale sur le territoire, la certification électronique en et hors établissement réalisée sur ordinateur ou application mobile, l'identification des établissements raccordés à CertDc ainsi que l'évolution du nombre de médecins certifiant électroniquement en France.
+            </div>
+
+            <div class="text-subtitle-1 mt-3">
+              Que trouve-t-on comme données régionales ?
+            </div>
+            <div class="ml-7">
+              Les données régionales disponibles dans RCED concernent le suivi de l'activité de certification électronique par régions en et hors établissement.
+            </div>
+
+            <div class="text-subtitle-1 mt-3">
+              Que trouve-t-on comme données à l'échelle d'un établissement ?
+            </div>
+            <div class="ml-7">
+              Les données à l'échelle d'un établissement concernent le nombre et le taux de certification électronique, évoluant au cours de l'année actuelle et par rapport à l'année précédente.
+            </div>
+
+          <div class="text-h6 mt-6">
+            Téléchargement des données
           </div>
 
-          <ul>
-            <li>Quelles en sont les règles?</li>
-            <li>Comment sont-elles gérées?</li>
-            <li>etc.</li>
-          </ul>
+            <div class="text-subtitle-1 mt-3">
+              A quelles données peut-on avoir accès ?
+            </div>
+            <div class="ml-7">
+              Un utilisateur peut télécharger les données ayant servi à générer un tableau ou un graphique auquel il a le droit d’accéder.
+            </div>
 
-          <div class="text-h6 mt-6 mb-3">
+            <div class="text-subtitle-1 mt-3">
+              Quels sont les formats de fichier proposées
+            </div>
+            <div class="ml-7">
+              csv et xls
+            </div>
+
+            <div class="text-subtitle-1 mt-3">
+              Quelle aide peut-on avoir pour exploiter ces données ?
+            </div>
+            <div class="ml-7">
+              Un dictionnaire des données sera disponible.
+            </div>
+
+          <div class="text-h6 mt-6">
             Développement du site
           </div>
 
-          <ul>
-            <li>Qui l’a conçu ?</li>
-            <li>Qui l’a développé ?</li>
-            <li>Qui l’héberge ?</li>
-            <li>Qui le maintient ?</li>
-          </ul>
+            <div class="text-subtitle-1 mt-3">
+              Qui l’a conçu et développé ?
+            </div>
+            <div class="ml-7">
+              Le Département des Systèmes d’Information de l’Inserm;
+            </div>
 
-          <p>etc.</p>
+            <div class="text-subtitle-1 mt-3">
+              Qui l’héberge et le maintient ?
+            </div>
+            <div class="ml-7">
+              La DGS et le CépiDcC jouant le rôle de maîtrise d’ouvrage durant la phase projet.
+            </div>
         </v-tab-item>
 
-        <v-tab-item class="text-body-1">
+        <v-tab-item class="text-body-2">
           <v-form v-model="valid" ref="form" @submit.prevent="sendEmail">
             <div class="text-h6 mb-7">Déposez votre message</div>
 
@@ -115,65 +194,67 @@
           </v-form>
         </v-tab-item>
 
-        <v-tab-item class="text-body-1">
-          <div class="text-h6 mb-3">
+        <v-tab-item class="text-body-2">
+          <div class="text-h6">
             Hébergement
           </div>
 
-          <p>
-            RCED est hébergé par le DSI de l’Inserm, sur le site du <a href="https://www.cines.fr/" target="blank">Cines</a> (Centre Informatique National de l'Enseignement Supérieur) à Montpellier.
-          </p>
+            <div class="mt-3">
+              RCED est hébergé par le DSI de l’Inserm, sur le site du <a href="https://www.cines.fr/" target="blank">Cines</a> (Centre Informatique National de l'Enseignement Supérieur) à Montpellier.
+            </div>
 
-          <div class="text-h6 mt-6 mb-3">
+          <div class="text-h6 mt-6">
             Conception et réalisation
           </div>
 
-          <p>
-            RCED a été conçu et réalisé par le DSI de l’Inserm, qui en assure également l’exploitation et la maintenance :
-          </p>
+          <div class="mt-3">
+            <p>
+              RCED a été conçu et réalisé par le DSI de l’Inserm, qui en assure également l’exploitation et la maintenance :
+              <ul>
+                <li>Chef de projet opérationnel : Dominique Pigeon</li>
+                <li>Chefs de projet techniques : Bruno Urbero, Sylvain Gérard, Salim Ydjedd</li>
+              </ul>
+            </p>
 
-          <ul>
-            <li>Chef de projet opérationnel : Dominique Pigeon</li>
-            <li>Chefs de projet techniques : Bruno Urbero, Sylvain Gérard, Salim Ydjedd</li>
-          </ul>
+            <p>
+              Ont participé aux spécifications : la DGS (Direction générale de la Santé, Ministère des Solidarités et de la Santé), Santé Publique France (ANSP, Agence nationale de santé publique) et le CépiDc-Inserm (Centre d'épidémiologie sur les causes médicales de Décès).
+            </p>
+          </div>
 
-          <p class="mt-3">
-            Ont participé aux spécifications : la DGS (Direction générale de la Santé, Ministère des Solidarités et de la Santé), Santé Publique France (ANSP, Agence nationale de santé publique) et le CépiDc-Inserm (Centre d'épidémiologie sur les causes médicales de Décès).
-          </p>
-
-          <div class="text-h6 mt-6 mb-3">
+          <div class="text-h6 mt-6">
             Origine des données
           </div>
 
-          <p>
-            Pour l’essentiel, les données proviennent des bases de données du CépiDc-Inserm, qui a pour mission de recueillir et mettre en qualité le contenu de la partie médicale des certificats de décès.
-          </p>
+            <div class="mt-3">
+              <p>
+                Pour l’essentiel, les données proviennent des bases de données du CépiDc-Inserm, qui a pour mission de recueillir et mettre en qualité le contenu de la partie médicale des certificats de décès.
+              </p>
 
-          <p>
-          Des données complémentaires proviennent de :
-          </p>
+              <p>
+                Des données complémentaires proviennent de :
+                <ul>
+                  <li>l’Insee : fichier des personnes décédées</li>
+                  <li>la <a href="https://drees.solidarites-sante.gouv.fr/" target="blank">Drees</a> (Direction de la recherche, des études, de l'évaluation et des statistiques, Ministère des Solidarités et de la Santé) : référentiel des établissements de santé (Finess)</li>
+                  <li>l’ATIH (Agence technique de l'information sur l'hospitalisation, Ministère des Solidarités et de la Santé) : nombre de décès en établissement de santé (issu du Pmsi)</li>
+                </ul>
+              </p>
+            </div>
 
-          <ul>
-            <li>l’Insee : fichier des personnes décédées</li>
-            <li>la <a href="https://drees.solidarites-sante.gouv.fr/" target="blank">Drees</a> (Direction de la recherche, des études, de l'évaluation et des statistiques, Ministère des Solidarités et de la Santé) : référentiel des établissements de santé (Finess)</li>
-            <li>l’ATIH (Agence technique de l'information sur l'hospitalisation, Ministère des Solidarités et de la Santé) : nombre de décès en établissement de santé (issu du Pmsi)</li>
-          </ul>
-
-          <div class="text-h6 mt-6 mb-3">
+          <div class="text-h6 mt-6">
             Contenu du site
           </div>
 
-          <p>
-            L'Inserm s'efforce d'assurer au mieux de ses possibilités l'exactitude et la mise à jour des informations diffusées, au moment de leur mise en ligne sur le site. Cependant, les données sont non finalisées, provisoires et susceptibles d’évoluer au cours du temps, et l'Inserm ne peut garantir l'exactitude, la précision ou l'exhaustivité des informations mises à disposition sur le site. Les informations présentes sur le site sont non-contractuelles.
-          </p>
+            <div class="mt-3">
+              L'Inserm s'efforce d'assurer au mieux de ses possibilités l'exactitude et la mise à jour des informations diffusées, au moment de leur mise en ligne sur le site. Cependant, les données sont non finalisées, provisoires et susceptibles d’évoluer au cours du temps, et l'Inserm ne peut garantir l'exactitude, la précision ou l'exhaustivité des informations mises à disposition sur le site. Les informations présentes sur le site sont non-contractuelles.
+            </div>
 
-          <div class="text-h6 mt-6 mb-3">
+          <div class="text-h6 mt-6">
             Données personnelles
           </div>
 
-          <p>
-            Les données de connexion sont protégées selon les normes en vigueur.
-          </p>
+            <div class="mt-3">
+              Les données de connexion sont protégées selon les normes en vigueur.
+            </div>
         </v-tab-item>
       </v-tabs-items>
     </v-card-text>
