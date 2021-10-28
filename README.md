@@ -30,34 +30,34 @@ cd rcedv3
 
 ## Installation
 
-> En production faire l'installation en sivant les instructions suivantes
+> En production faire l'installation en suivant ces instructions
 
-<!--
 * Préparer le serveur de production [ici](./INSTALL.pdf)
 * Frontend [ici](./frontend/README.md#installation)
 * Backend [ici](./backend/README.md#installation)
--->
+<!--
 * Préparer le serveur de production voir le fichier **Installation.pdf**
 * Frontend voir le fichier **Frontend.pdf**, rubrique Installation
 * Backend voir le fichier **Backend.pdf**, rubrique Installation
+-->
 
 ## Lancer l'application en développement
 
-<!--
 * Frontend [ici](./frontend/README.md#lancer-l'application-en-développement)
 * Backend [ici](./backend/README.md#lancer-l'application-en-développement)
--->
+<!--
 * Frontend voir le fichier **Frontend.pdf**, rubrique Lancer l'application en développement
 * Backend voir le fichier **Backend.pdf**, rubrique Lancer l'application en développement
+-->
 
 ## Lancer l'application en production
 
-<!--
 * Frontend [ici](./frontend/README.md#lancer-l'application-en-production)
 * Backend [ici](./backend/README.md#lancer-l'application-en-production)
--->
+<!--
 * Frontend voir le fichier **Frontend.pdf**, rubrique Lancer l'application en production
 * Backend voir le fichier **Backend.pdf**, rubrique Lancer l'application en production
+-->
 
 ## Contribuer
 
